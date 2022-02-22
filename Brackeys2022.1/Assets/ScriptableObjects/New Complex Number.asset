@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47e270e1ee5e55948a76ba364f39ffb8, type: 3}
   m_Name: New Complex Number
   m_EditorClassIdentifier: 
-  real: 3
-  imaginary: 8
+  ComplexNumber:
+    real: 2
+    imaginary: 8

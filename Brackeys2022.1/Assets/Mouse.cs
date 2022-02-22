@@ -12,4 +12,8 @@ public class Mouse : MonoBehaviour
         mousePos.z = _depth;
         return mousePos;
     }
+    public static bool MouseHover(Collider2D Collider)
+    {
+        return Collider.OverlapPoint(Mouse.GetMousePos(0));
+    }
 }

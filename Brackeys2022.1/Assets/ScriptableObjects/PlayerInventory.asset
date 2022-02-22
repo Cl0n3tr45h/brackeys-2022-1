@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47e270e1ee5e55948a76ba364f39ffb8, type: 3}
-  m_Name: New Complex Number 1
+  m_Script: {fileID: 11500000, guid: 8d847ff3e4f53c240abc6a2839bef758, type: 3}
+  m_Name: PlayerInventory
   m_EditorClassIdentifier: 
-  ComplexNumber:
-    real: 9
-    imaginary: 1
+  ComplexNumbers:
+  - {fileID: 11400000, guid: 2e33c3c48a3025f44b4b92b7f94da1d6, type: 2}
+  - {fileID: 11400000, guid: 3191951834ff8e342af39d8a88d58230, type: 2}
