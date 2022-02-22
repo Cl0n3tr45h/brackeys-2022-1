@@ -5,19 +5,19 @@ using UnityEngine;
 public class Gun : MonoBehaviour
 {
     public PlayerMovement Player;
-    public ComplexNumberData Damage;
+    public ComplexNumberData Damage { get; set; }
     private int currentDamage;
-    public ComplexNumberData ProjectileSpeed;
+    public ComplexNumberData ProjectileSpeed  { get; set; }
     private int currentProjectileSpeed;
 
-    public ComplexNumberData FireRate;
+    public ComplexNumberData FireRate  { get; set; }
     private int currentFireRate;
     private float shotIntervalTimer;
 
-    public ComplexNumberData Range;
+    public ComplexNumberData Range  { get; set; }
     private int currentRange;
 
-    public ComplexNumberData MagSize;
+    public ComplexNumberData MagSize { get; set; }
     public int currentMagSize;
     
     public GameObject BulletPrefab;
