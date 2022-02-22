@@ -71,7 +71,12 @@ public class PlayerMovement : MonoBehaviour
 
 	public void Move(float move, bool jump)
 	{
-
+		if (m_Grounded && jump)
+		{
+			// Add a vertical force to the player.
+			m_Grounded = false;
+			m_Rigidbody2D.AddForce(new Vector2(m_Rigidbody2D.velocity.x, m_JumpForce));
+		}
 		//only control the player if grounded or airControl is turned on
 		if (m_Grounded)
 		{
@@ -81,6 +86,7 @@ public class PlayerMovement : MonoBehaviour
 			m_Rigidbody2D.velocity = Vector3.SmoothDamp(m_Rigidbody2D.velocity, targetVelocity, ref m_Velocity, m_MovementSmoothing);
 
 		}
+		
 		else if (m_AirControl)
 		{
 			// Move the character by finding the target velocity
@@ -101,14 +107,8 @@ public class PlayerMovement : MonoBehaviour
 			Flip();
 		}
 		// If the player should jump...
-		if (m_Grounded && jump)
-		{
-			// Add a vertical force to the player.
-			m_Grounded = false;
-			m_Rigidbody2D.AddForce(new Vector2(m_Rigidbody2D.velocity.x, m_JumpForce));
-		}
+		
 	}
-
 
 	private void Flip()
 	{
