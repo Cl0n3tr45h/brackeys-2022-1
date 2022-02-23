@@ -11,15 +11,21 @@ public class PlaneShift : MonoBehaviour
 
     private bool InReal = true;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         
+        if (OnShiftToImaginary == null)
+        {
+            OnShift = new UnityEvent();
+            OnShiftToReal = new UnityEvent();
+            OnShiftToImaginary = new UnityEvent();
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Q) && OnShiftToReal != null)
         {
             InReal = !InReal;
             if (InReal == true)
