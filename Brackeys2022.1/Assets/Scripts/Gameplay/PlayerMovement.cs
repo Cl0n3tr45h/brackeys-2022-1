@@ -12,13 +12,13 @@ public class PlayerMovement : MonoBehaviour
 	[SerializeField] private bool m_AirControl = false;							// Whether or not a player can steer while jumping;
 	[SerializeField] private LayerMask m_WhatIsGround;							// A mask determining what is ground to the character
 	[SerializeField] private Transform m_GroundCheck;							// A position marking where to check if the player is grounded.
-
-	const float k_GroundedRadius = .2f; // Radius of the overlap circle to determine if grounded
+	[SerializeField] private float m_DashDistance = 5f;
+	
 	private bool m_Grounded;            // Whether or not the player is grounded.
 	private Rigidbody2D m_Rigidbody2D;
 	public bool m_FacingRight = true;  // For determining which way the player is currently facing.
 	private Vector3 m_Velocity = Vector3.zero;
-	
+	private Vector2 dashForce = new Vector2();
 	/*[Header("Events")]
 	[Space]
 
@@ -31,6 +31,7 @@ public class PlayerMovement : MonoBehaviour
 	private float horizontalInput;
 	private bool m_Jumping;
 	private float jumpTimeCounter;
+	private bool m_Dashing;
 	
 	private void Awake()
 	{
@@ -44,33 +45,57 @@ public class PlayerMovement : MonoBehaviour
 	private void FixedUpdate()
 	{
 		bool wasGrounded = m_Grounded;
+		bool wasDashing = m_Dashing;
 		m_Grounded = false;
-
+		m_Dashing = false;
 		// The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
 		// This can be done using layers instead but Sample Assets will not overwrite your project settings.
-		Collider2D[] colliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, k_GroundedRadius, m_WhatIsGround);
-		for (int i = 0; i < colliders.Length; i++)
+		RaycastHit hit;
+		if (Physics.Raycast(m_GroundCheck.position, Vector3.down, out hit, .5f, m_WhatIsGround,
+			QueryTriggerInteraction.Ignore))
 		{
-			if (colliders[i].gameObject != gameObject)
-			{
-				m_Grounded = true;
-				//if (!wasGrounded)
-				//	OnLandEvent.Invoke();
-			}
+			m_Grounded = true;
+		}
+		else
+		{
+			m_Grounded = false;
 		}
 
 		horizontalInput = Input.GetAxisRaw("Horizontal") * m_RunSpeed;
-		if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.Space) && m_Grounded)
+		if (Input.GetKey(KeyCode.W) && m_Grounded)
 		{
 			m_Jumping = true;
 		}
-		Move(horizontalInput * Time.fixedDeltaTime, m_Jumping);
+
+		if (Input.GetKey(KeyCode.Space) && !wasDashing)
+		{
+			m_Dashing = true;
+		}
+		if (Input.GetKeyUp(KeyCode.Space))
+		{
+			m_Dashing = false;
+		}
+		Move(horizontalInput * Time.fixedDeltaTime, m_Jumping, m_Dashing);
 		m_Jumping = false;
 	}
 
 
-	public void Move(float move, bool jump)
+	public void Move(float move, bool jump, bool dash)
 	{
+		if (dash)
+		{
+			var direction = -(this.transform.position - Mouse.GetMousePos(0)).normalized;
+			direction *= m_DashDistance;
+			/*dashForce = new Vector2(Vector2.one.x * direction.x, Vector2.one.y * direction.y);
+			m_Rigidbody2D.AddRelativeForce(dashForce, ForceMode2D.Impulse);
+			*/
+			this.transform.position += direction;
+		}
+		else
+		{
+			if(dashForce != Vector2.zero)
+				m_Rigidbody2D.velocity = -dashForce;
+		}
 		if (m_Grounded && jump)
 		{
 			// Add a vertical force to the player.
@@ -86,11 +111,10 @@ public class PlayerMovement : MonoBehaviour
 			m_Rigidbody2D.velocity = Vector3.SmoothDamp(m_Rigidbody2D.velocity, targetVelocity, ref m_Velocity, m_MovementSmoothing);
 
 		}
-		
 		else if (m_AirControl)
 		{
 			// Move the character by finding the target velocity
-			Vector3 targetVelocity = new Vector2(move * 5f, m_Rigidbody2D.velocity.y);
+			Vector3 targetVelocity = new Vector2(move * 10f, m_Rigidbody2D.velocity.y);
 			// And then smoothing it out and applying it to the character
 			m_Rigidbody2D.velocity = Vector3.SmoothDamp(m_Rigidbody2D.velocity, targetVelocity, ref m_Velocity, m_MovementSmoothing);
 		}
