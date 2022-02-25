@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
+using Random = UnityEngine.Random;
 
 public enum GameState
 {
@@ -27,6 +28,8 @@ public class GameLoop : MonoBehaviour
     private static int currentKillCount;
     public float[] SpawnRate;
 
+    public GameObject[] Enemies;
+    private static List<Transform> enemySpawnPoints = new List<Transform>();
     
     public GameObject Player;
     private GameState gameState;
@@ -91,8 +94,45 @@ public class GameLoop : MonoBehaviour
         Player.transform.SetPositionAndRotation(GameObject.Find("PlayerSpawn").transform.position, Quaternion.identity);
         
         //Get enemy spawn points 
-        
+        var parent = GameObject.Find("EnemySpawns");
+        for (int i = 0; i < parent.transform.childCount; i++)
+        {
+            enemySpawnPoints.Add(parent.transform.GetChild(i));
+        }
+
         //spawn enemy at every point
+        
+        foreach (var location in enemySpawnPoints)
+        {
+            var enemyToSpawn = 0;
+            switch (currentLevelIndex)
+            {
+                /*case 0:
+                    enemyToSpawn = 0;
+                    break;
+                case 1:
+                    enemyToSpawn = 1;
+                    break;
+                case 2:
+                    enemyToSpawn = 2;
+                    break;
+                case 3:
+                    enemyToSpawn = Random.Range(0, 1);
+                    break;
+                case 4:
+                    enemyToSpawn = Random.Range(1, 2);
+                    break;
+                case 5:
+                    int[] fuck = new int[]{0, 2};
+                    enemyToSpawn = fuck[Random.Range(0, 1)];
+                    break;*/
+                default:
+                    enemyToSpawn = Random.Range(0, 2);
+                    break;
+            }
+
+            Instantiate(Enemies[enemyToSpawn], location.position, Quaternion.identity);
+        }
     }
 
     public void DespawnLevel()

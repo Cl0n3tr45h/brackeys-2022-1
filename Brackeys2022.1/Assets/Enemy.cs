@@ -80,6 +80,7 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        LookAtPlayer();
         if (RealEnemy == PlaneShift.InReal)
         {
             switch (state)
@@ -100,6 +101,26 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    public void LookAtPlayer()
+    {
+        if (Player.transform.position.x > this.transform.position.x)
+        {
+            //scale = 1
+
+            // Multiply the player's x local scale by -1.
+            Vector3 theScale = transform.localScale;
+            theScale.x = 1;
+            transform.localScale = theScale;
+        }
+        else
+        {
+            //scale = -1
+            Vector3 theScale = transform.localScale;
+            theScale.x = -1;
+            transform.localScale = theScale;
+        }
+    }
+    
     public void IdleBehaviour()
     {
         if (!waitForShoot)
