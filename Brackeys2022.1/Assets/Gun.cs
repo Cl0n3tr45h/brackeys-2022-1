@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,6 +23,8 @@ public class Gun : MonoBehaviour
     
     public GameObject BulletPrefab;
     public Transform BulletSpawn;
+
+    public LayerMask WhatIsEnemy;
     
     private Vector3 mousePos;
     // Start is called before the first frame update
@@ -63,6 +66,13 @@ public class Gun : MonoBehaviour
         
         transform.right = direction;
     }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawRay(BulletSpawn.position, -(transform.position-Mouse.GetMousePos(0)).normalized * currentRange);
+    }
+
     void Shoot()
     {
         if (shotIntervalTimer <= 0 && currentMagSize > 0)
@@ -70,12 +80,23 @@ public class Gun : MonoBehaviour
             //do the shooting
             shotIntervalTimer = 1/(currentFireRate*2);
             //currentMagSize--;
-            GameObject Bullet = Instantiate(BulletPrefab, BulletSpawn.position, Quaternion.identity);
+           /* GameObject Bullet = Instantiate(BulletPrefab, BulletSpawn.position, Quaternion.identity);
             //Bullet.transform.right = mousePos;
             Bullet.GetComponent<bulletMovement>().ProjectileSpeed = currentProjectileSpeed;
             Bullet.GetComponent<bulletMovement>().LifeTime = currentRange;
             Debug.Log("I am doing " + currentDamage + " Damage owo");
-            
+            */
+           RaycastHit2D hit = Physics2D.Raycast(BulletSpawn.position, -(transform.position-Mouse.GetMousePos(0)).normalized, currentRange,
+               WhatIsEnemy, Mathf.NegativeInfinity, Mathf.Infinity);
+           if (hit.collider != null)
+           {
+               Debug.Log("hit!");
+               hit.collider.gameObject.GetComponentInParent<Enemy>().Damage(currentDamage);
+           }
+           else
+           {
+               Debug.Log("no hit!");
+           }
         }
         else
         {

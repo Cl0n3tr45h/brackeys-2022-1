@@ -12,6 +12,8 @@ public class CameraController : MonoBehaviour
     public float heightThreshold;
     public float Speed;
     private Vector3 origin;
+
+    private Vector3 velocity = Vector3.zero;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,10 +34,13 @@ public class CameraController : MonoBehaviour
             deltaY *= CameraWiggle;
 
             var finalX = Mathf.Clamp(centerX - deltaX, -10, 10);
-            var finalY = Mathf.Clamp(centerY - deltaY, -8, 8);
-            this.transform.position =new Vector3( Mathf.Lerp(origin.x, origin.x + finalX, Speed), Mathf.Lerp(origin.y, origin.y + finalY, Speed), -10);
-        //}
+            var finalY = Mathf.Clamp(centerY - deltaY, -8, 25);
+
+            transform.position = Vector3.SmoothDamp(transform.position, new Vector3(finalX, finalY, -10), ref velocity, 0.3f);
+            //this.transform.position =new Vector3( Mathf.Lerp(origin.x, origin.x + finalX, Speed), Mathf.Lerp(origin.y, origin.y + finalY, Speed), -10);
+            //}
     }
+
     /*
     private bool CheckMouseToBounds()
     {

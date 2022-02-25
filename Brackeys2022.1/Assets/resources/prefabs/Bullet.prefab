@@ -44,8 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc26c4818e26e0b4bb05d91d60519b39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ProjectileSpeed: 0
-  LifeTime: 0
+  ProjectileSpeed: 3
+  LifeTime: 13
+  Direction: {x: 0, y: 0, z: 0}
 --- !u!1 &6677899293669620912
 GameObject:
   m_ObjectHideFlags: 0

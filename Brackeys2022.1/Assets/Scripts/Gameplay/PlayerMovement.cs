@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
 	[SerializeField] private LayerMask m_WhatIsGround;							// A mask determining what is ground to the character
 	[SerializeField] private Transform m_GroundCheck;							// A position marking where to check if the player is grounded.
 	[SerializeField] private float m_DashDistance = 5f;
+	[SerializeField] private float m_dashtimer;
 	
 	private bool m_Grounded;            // Whether or not the player is grounded.
 	private Rigidbody2D m_Rigidbody2D;
@@ -32,14 +33,44 @@ public class PlayerMovement : MonoBehaviour
 	private bool m_Jumping;
 	private float jumpTimeCounter;
 	private bool m_Dashing;
+	private bool m_AllowedToDash;
+	private float m_timer;
 	
 	private void Awake()
 	{
 		m_Rigidbody2D = GetComponent<Rigidbody2D>();
+		m_timer = m_dashtimer;
+		//	if (OnLandEvent == null)
+		//		OnLandEvent = new UnityEvent();
 
-	//	if (OnLandEvent == null)
-	//		OnLandEvent = new UnityEvent();
+	}
 
+	private void Update()
+	{
+		if (Input.GetKeyDown(KeyCode.W) && m_Grounded)
+		{
+			m_Jumping = true;
+		}
+		
+		if(Input.GetKeyDown(KeyCode.Space))
+		{
+			//m_Rigidbody2D.gravityScale = 0.1f;
+			m_Rigidbody2D.drag = 25f;
+		}
+
+		if (Input.GetKeyUp(KeyCode.Space))
+		{
+			//m_Rigidbody2D.gravityScale = 2f;
+			m_Rigidbody2D.drag = 0f;
+		}
+	}
+
+	private void OnDrawGizmos()
+	{
+		Gizmos.color= Color.red;
+		Gizmos.DrawLine(m_GroundCheck.position, new Vector3(m_GroundCheck.position.x, m_GroundCheck.position.y - .5f, m_GroundCheck.position.z));
+		
+		Gizmos.DrawRay(transform.position, -(transform.position-Mouse.GetMousePos(0)).normalized * m_DashDistance);
 	}
 
 	private void FixedUpdate()
@@ -51,8 +82,7 @@ public class PlayerMovement : MonoBehaviour
 		// The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
 		// This can be done using layers instead but Sample Assets will not overwrite your project settings.
 		RaycastHit hit;
-		if (Physics.Raycast(m_GroundCheck.position, Vector3.down, out hit, .5f, m_WhatIsGround,
-			QueryTriggerInteraction.Ignore))
+		if (Physics2D.Raycast((Vector2)m_GroundCheck.position, Vector2.down, .5f, m_WhatIsGround, -Mathf.Infinity, Mathf.Infinity))
 		{
 			m_Grounded = true;
 		}
@@ -62,19 +92,29 @@ public class PlayerMovement : MonoBehaviour
 		}
 
 		horizontalInput = Input.GetAxisRaw("Horizontal") * m_RunSpeed;
-		if (Input.GetKey(KeyCode.W) && m_Grounded)
-		{
-			m_Jumping = true;
-		}
-
-		if (Input.GetKey(KeyCode.Space) && !wasDashing)
+		
+		//if (Input.GetKey(KeyCode.Space) && m_AllowedToDash)
+		if(Input.GetMouseButton(1) && m_AllowedToDash)
 		{
 			m_Dashing = true;
+			m_AllowedToDash = false;
 		}
-		if (Input.GetKeyUp(KeyCode.Space))
+		if (Input.GetMouseButtonUp(1))
 		{
 			m_Dashing = false;
 		}
+
+		if (!m_AllowedToDash)
+		{
+			m_timer -= Time.deltaTime;
+			if (m_timer <= 0)
+			{
+				m_AllowedToDash = true;
+				m_timer = m_dashtimer;
+			}
+		}
+		
+
 		Move(horizontalInput * Time.fixedDeltaTime, m_Jumping, m_Dashing);
 		m_Jumping = false;
 	}
@@ -85,11 +125,25 @@ public class PlayerMovement : MonoBehaviour
 		if (dash)
 		{
 			var direction = -(this.transform.position - Mouse.GetMousePos(0)).normalized;
-			direction *= m_DashDistance;
-			/*dashForce = new Vector2(Vector2.one.x * direction.x, Vector2.one.y * direction.y);
+			RaycastHit2D hit = Physics2D.Raycast(this.transform.position, direction, m_DashDistance, m_WhatIsGround,
+				Mathf.NegativeInfinity, Mathf.Infinity);
+			Debug.Log(hit.distance);
+			if (hit)
+			{
+				if(hit.collider.isTrigger)
+					direction *= m_DashDistance;
+				else
+					direction *= hit.distance;
+			}
+			else
+			{
+				direction *= m_DashDistance;
+			}
+				/*dashForce = new Vector2(Vector2.one.x * direction.x, Vector2.one.y * direction.y);
 			m_Rigidbody2D.AddRelativeForce(dashForce, ForceMode2D.Impulse);
 			*/
-			this.transform.position += direction;
+				//m_Rigidbody2D.AddForce(new Vector2(m_Rigidbody2D.velocity.x, m_JumpForce/5f));
+			this.transform.position = new Vector3(Mathf.Lerp(this.transform.position.x, this.transform.position.x + direction.x, 0.9f), Mathf.Lerp(this.transform.position.y, this.transform.position.y + direction.y, 0.9f), 0);
 		}
 		else
 		{

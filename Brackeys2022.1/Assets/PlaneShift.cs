@@ -9,7 +9,7 @@ public class PlaneShift : MonoBehaviour
     public UnityEvent OnShiftToReal;
     public UnityEvent OnShift;
 
-    private bool InReal = true;
+    public static bool InReal = true;
     // Start is called before the first frame update
     void Awake()
     {
