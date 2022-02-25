@@ -8,8 +8,8 @@ public class CameraController : MonoBehaviour
 
     public float CameraWiggle;
 
-    public float WidthThreshold;
-    public float heightThreshold;
+    private float WidthThreshold;
+    private float heightThreshold;
     public float Speed;
     private Vector3 origin;
 
@@ -33,8 +33,11 @@ public class CameraController : MonoBehaviour
             deltaX *= CameraWiggle;
             deltaY *= CameraWiggle;
 
-            var finalX = Mathf.Clamp(centerX - deltaX, -10, 10);
-            var finalY = Mathf.Clamp(centerY - deltaY, -8, 25);
+            
+            WidthThreshold = Screen.width;
+            heightThreshold = Screen.height;
+            var finalX = Mathf.Clamp(centerX - deltaX, centerX - WidthThreshold, centerX + WidthThreshold);
+            var finalY = Mathf.Clamp(centerY - deltaY, centerY - heightThreshold, centerY + heightThreshold);
 
             transform.position = Vector3.SmoothDamp(transform.position, new Vector3(finalX, finalY, -10), ref velocity, 0.3f);
             //this.transform.position =new Vector3( Mathf.Lerp(origin.x, origin.x + finalX, Speed), Mathf.Lerp(origin.y, origin.y + finalY, Speed), -10);

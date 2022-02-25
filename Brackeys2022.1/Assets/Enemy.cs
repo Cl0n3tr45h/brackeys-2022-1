@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEditor.UI;
 using UnityEngine;
+using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
 public enum EnemyState
@@ -43,6 +44,8 @@ public class Enemy : MonoBehaviour
     private bool waitForShoot;
 
     public TeleportCollider[] TeleportColliders;
+
+    public UnityEvent OnEnemyDeath;
     // Start is called before the first frame update
     void Start()
     {
@@ -52,6 +55,10 @@ public class Enemy : MonoBehaviour
         coll = GetComponentInChildren<Collider2D>();
         TeleportColliders = FindObjectsOfType<TeleportCollider>();
         Debug.Log(TeleportColliders.Length);
+        if (OnEnemyDeath == null)
+        {
+            OnEnemyDeath = new UnityEvent();
+        }
     }
 
     private void OnEnable()
@@ -60,6 +67,8 @@ public class Enemy : MonoBehaviour
         planeShift = GameObject.Find("GameManager").GetComponent<PlaneShift>();
         planeShift.OnShiftToReal?.AddListener(SetLayerMaskReal);
         planeShift.OnShiftToImaginary?.AddListener(SetLayerMaskImaginary);
+        
+        GameLoop.SubscribeToEnemyEvent(OnEnemyDeath);
     }
 
     private void OnDisable()
@@ -185,6 +194,7 @@ public class Enemy : MonoBehaviour
 
     public void KillEnemy()
     {
+        OnEnemyDeath.Invoke();
         Destroy(this.gameObject);
         //Do stuff for combos points loot etc
     }

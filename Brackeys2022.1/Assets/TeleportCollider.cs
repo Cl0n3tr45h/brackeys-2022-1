@@ -20,12 +20,12 @@ public class TeleportCollider : MonoBehaviour
         CheckVacancy();
     }
 
-    private void OnDrawGizmos()
+   /* private void OnDrawGizmos()
     {
         Gizmos.color = IsFree ? Color.green : Color.red;
 
         Gizmos.DrawWireSphere(this.transform.position, 1f);
-    }
+    }*/
 
     public void CheckVacancy()
     {
