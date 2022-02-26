@@ -4764,6 +4764,10 @@ PrefabInstance:
       propertyPath: ComplexNumberPanel
       value: 
       objectReference: {fileID: 1704451258}
+    - target: {fileID: 2889311755775214701, guid: 2c224f200f9465e418c79e0a89f45ac5, type: 3}
+      propertyPath: TargetKills.Array.data[0]
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2c224f200f9465e418c79e0a89f45ac5, type: 3}
 --- !u!1001 &2905049781991959654
