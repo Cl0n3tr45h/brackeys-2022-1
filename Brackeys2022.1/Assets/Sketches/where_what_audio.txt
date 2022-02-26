@@ -1,0 +1,37 @@
+BUTTONS (buttons existieren in hauptmenü, crafting, pause)
+button hover - menu-click-breviceps.wav
+button click - menu_hover_sawuare
+
+
+PLAYER ACTIONS
+shift plane - plane_shift_zhorbe.wav
+hover in air - hover_atrius1.wav (wird gespielt sobald space down wird)
+shoot - shot_short_bane-sound.wav und shot_long_gerainsan.wav
+können wir unterschiedliche sounds abhängig von der feuerrate abspielen? also falls currentFireRate < 12 ist, wird long gespielt, sonst short. falls nicht, dann nur short spielen
+spieler nimmt schaden - player_hit_q-k.wav
+spieler kann nicht shiften weil geometrie - no_plane_shift_4829__zajo.wav (aktuell nicht implementiert)
+
+
+GAME STATE
+level abgeschlossen - level_completed_plasterbrain.wav
+game won - success_518750__lightbulbafagd.ogg
+player death - player_death_spookymodem.wav
+(Combo ist aktuell nicht implementiert)
+create combo - combo_create_368298__radioactive-blueberry.wav
+lose combo - combo_lose_522313__filmmakersmanual.wav
+increase combo - combo_increase_443922__mietech.wav
+decrease combo - combo_decrease_106290__pder.wav
+ 
+
+ENEMY
+spawn - enemy_spawn_434861__mikobuntu.wav
+teleport - enemy_teleport_220205__gameaudio.wav
+getroffen - enemy_hit_522307__filmmakersmanual.wav
+die - enemy_death_jofae.mp3
+shoot - enemy_shot0_halgrimm.wav
+
+crafting
+add to stat - crafting_add_lurpsis.mp3
+remove from stat - remove_stat_522333__filmmakersmanual.wav
+
+
