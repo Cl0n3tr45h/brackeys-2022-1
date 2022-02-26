@@ -46,14 +46,14 @@ MonoBehaviour:
   sounds:
   - name: ButtonHover
     clip: {fileID: 8300000, guid: 589d4785160823544bfd70b433bd290b, type: 3}
-    volume: 0
-    pitch: 0
+    volume: 0.25
+    pitch: 1
     loop: 0
     source: {fileID: 0}
-  - name: ButonClick
+  - name: ButtonClick
     clip: {fileID: 8300000, guid: 52a3a1c33b3796b4796e9c41f8bcc6df, type: 3}
-    volume: 0
-    pitch: 0
+    volume: 0.25
+    pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: ShiftPlane

@@ -34,6 +34,7 @@ public class PlayerHealth : MonoBehaviour
         }
         //update UI
         UpdateUI();
+        FindObjectOfType<AudioManager>().Play("PlayerHit");
     }
 
     public void UpdateUI()

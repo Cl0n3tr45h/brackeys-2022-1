@@ -60,6 +60,7 @@ public class Gun : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             Shoot();
+            FindObjectOfType<AudioManager>().Play("PlayerShoot");
         }
         if(shotIntervalTimer > 0)
             shotIntervalTimer -= Time.deltaTime;
