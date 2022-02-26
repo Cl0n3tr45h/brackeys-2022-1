@@ -98,8 +98,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 6624998182178966579}
   CameraWiggle: 0.4
-  WidthThreshold: 0
-  heightThreshold: 0
   Speed: 1
 --- !u!1 &415408877
 GameObject:
@@ -196,6 +194,9 @@ MonoBehaviour:
   currentMagSize: 1
   BulletPrefab: {fileID: 5266692589300349521, guid: be0b590992489834592abc3aa945beca, type: 3}
   BulletSpawn: {fileID: 415408878}
+  WhatIsEnemy:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &1437273928
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -557,15 +558,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a2133c6bff73454191b991263cee884, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_JumpForce: 300
-  m_RunSpeed: 50
+  m_JumpForce: 750
+  m_RunSpeed: 60
   m_MovementSmoothing: 0.05
   m_AirControl: 1
   m_WhatIsGround:
     serializedVersion: 2
-    m_Bits: 55
+    m_Bits: 1591
   m_GroundCheck: {fileID: 6624998181843627236}
   m_DashDistance: 5
+  m_dashtimer: 0.2
   m_FacingRight: 1
 --- !u!58 &6624998182178966576
 CircleCollider2D:
