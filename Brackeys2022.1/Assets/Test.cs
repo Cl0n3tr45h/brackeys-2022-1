@@ -8,22 +8,19 @@ public class Test : MonoBehaviour
     public ComplexNumberData CoNum2;
 
     public List<ComplexNumberData> Numbers;
+
+    public PlayerHealth ph;
     // Start is called before the first frame update
     void Start()
     {
-        ComplexNumberData resultAdd = ComplexNumberData.Add(CoNum1, CoNum2);
-        Debug.Log(resultAdd.Print());
-        ComplexNumberData resultMult = ComplexNumberData.Multiply(CoNum1, CoNum2);
-        Debug.Log(resultMult.Print());
-        ComplexNumberData resultAddList = ComplexNumberData.Add(Numbers);
-        Debug.Log(resultAddList.Print());
-        //ComplexNumberData resultMultList = ComplexNumberData.Multiply(Numbers);
-        //Debug.Log(resultMultList.Print());
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            ph.TakeDamageReal(5);
+        }   
     }
 }

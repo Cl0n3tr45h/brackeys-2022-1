@@ -39,6 +39,9 @@ public class GameLoop : MonoBehaviour
     private static GameObject[] Enemies;
     private static List<GameObject> activeEnemies = new List<GameObject>();
     private static List<Transform> enemySpawnPoints = new List<Transform>();
+    private static float enemyCount;
+    private static float enemyInReal;
+    public static bool NextEnemyReal;
     [Space] [Space] 
     [Header("Loot")] 
     public Canvas LootCanvas;
@@ -77,7 +80,8 @@ public class GameLoop : MonoBehaviour
                 FightBehaviour();
                 break;
             case GameState.LOOT:
-                LootBehaviour();
+                DespawnLevel();
+                SpawnLevel();
                 break;
             case GameState.CRAFT:
                 CraftBehaviour();
@@ -196,8 +200,10 @@ public class GameLoop : MonoBehaviour
                 enemyToSpawn = Random.Range(0, 2);
                 break;
         }
-
+        NextEnemyReal = !NextEnemyReal;
+        
         activeEnemies.Add(Instantiate(Enemies[enemyToSpawn], enemySpawnPoints[_spawnPoint].position, Quaternion.identity));
+
     }
     
     public static void DespawnLevel()

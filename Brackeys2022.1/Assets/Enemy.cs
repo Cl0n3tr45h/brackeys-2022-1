@@ -68,6 +68,7 @@ public class Enemy : MonoBehaviour
         planeShift.OnShiftToImaginary?.AddListener(SetLayerMaskImaginary);
         
         GameLoop.SubscribeToEnemyEvent(OnEnemyDeath);
+        RealEnemy = GameLoop.NextEnemyReal;
     }
 
     // Update is called once per frame
@@ -91,6 +92,10 @@ public class Enemy : MonoBehaviour
                    IdleBehaviour();
                    break;
             }
+        }
+        else
+        {
+            
         }
     }
 
