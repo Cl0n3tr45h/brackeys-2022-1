@@ -28,6 +28,8 @@ public class Gun : MonoBehaviour
     public LayerMask WhatIsEnemy;
 
     private Vector3 mousePos;
+
+    private PlaneShift planeShift;
     // Start is called before the first frame update
     void Start()
     {
@@ -37,6 +39,17 @@ public class Gun : MonoBehaviour
         shotIntervalTimer = 0;
         currentRange = Range.real;
         currentMagSize = MagSize.real;
+    }
+
+    private void OnEnable()
+    {
+        planeShift = GameObject.Find("GameManager").GetComponent<PlaneShift>();
+        planeShift.OnShift?.AddListener(OnShift);
+    }
+
+    private void OnDisable()
+    {
+        planeShift.OnShift?.RemoveListener(OnShift);
     }
 
     // Update is called once per frame
@@ -112,6 +125,9 @@ public class Gun : MonoBehaviour
     {
         var Hue = Random.Range(0f, 1f);
         BulletPrefab.GetComponent<SpriteRenderer>().color = Color.HSVToRGB(Hue, 1f, 1f, true);
+        var TheScale = BulletPrefab.transform.localScale;
+        TheScale.x = currentRange;
+        BulletPrefab.transform.localScale = TheScale;
         BulletPrefab.SetActive(true);
         yield return new WaitForSeconds(0.2f);
         
