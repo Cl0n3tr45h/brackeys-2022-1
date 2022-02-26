@@ -1,0 +1,136 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2889311755775214698
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2889311755775214696}
+  - component: {fileID: 2889311755775214697}
+  - component: {fileID: 2889311755775214703}
+  - component: {fileID: 2889311755775214702}
+  - component: {fileID: 2889311755775214701}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2889311755775214696
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2889311755775214698}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2889311755775214697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2889311755775214698}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9dba9c324599f44eba3979c7bbe02df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CoNum1:
+    real: 5
+    imaginary: 2
+  CoNum2:
+    real: 3
+    imaginary: 1
+  Numbers:
+  - real: 5
+    imaginary: 2
+  - real: 3
+    imaginary: 1
+  - real: 2
+    imaginary: 4
+  - real: 2
+    imaginary: 2
+--- !u!114 &2889311755775214703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2889311755775214698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 752bf8e5e592c2c4dbae1672c7ead561, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2889311755775214702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2889311755775214698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5815ab36b398f29479fcd7813b597f76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnShiftToImaginary:
+    m_PersistentCalls:
+      m_Calls: []
+  OnShiftToReal:
+    m_PersistentCalls:
+      m_Calls: []
+  OnShift:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &2889311755775214701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2889311755775214698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e46b4dc3b6214d34183dda1142ff976c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Player: {fileID: 0}
+  InventoryObject: {fileID: 0}
+  Levels:
+  - {fileID: 2416991128938042000, guid: 375caaf06afd7464b9979736adeb9299, type: 3}
+  - {fileID: 3499406277528898350, guid: d8c620ab12fce2249aea2cde2db77df9, type: 3}
+  - {fileID: 8353132355773009834, guid: 5e340d6ed777d1546be7069653d9b8af, type: 3}
+  - {fileID: 7884966156784717294, guid: e0900886b3802a44d93a05884d0b6520, type: 3}
+  - {fileID: 6067269138136876375, guid: 7f8d713728f948b40a7d092960057d4c, type: 3}
+  - {fileID: 3750562951571749759, guid: facc323cb70c550498160db77882dbf8, type: 3}
+  - {fileID: 5746927352261099500, guid: 214760876e5890d4e977ac852cfde7b4, type: 3}
+  TargetKills: 01000000080000000900000006000000070000000600000004000000
+  SpawnRate:
+  - 8
+  - 6
+  - 5
+  - 4
+  - 3
+  - 3
+  - 3
+  EnemiePrefabs:
+  - {fileID: 3222659839379983617, guid: fdfd3f34066a7b24091bbfb4c1838fe6, type: 3}
+  - {fileID: 3222659839379983617, guid: fdfd3f34066a7b24091bbfb4c1838fe6, type: 3}
+  - {fileID: 3222659839379983617, guid: fdfd3f34066a7b24091bbfb4c1838fe6, type: 3}
+  LootCanvas: {fileID: 0}
+  ComplexNumberPanel: {fileID: 0}
+  OperandPanel: {fileID: 0}
+  LootPrefab: {fileID: 3760853633651657197, guid: b805ac6de32637b4aa8b5a53d8cd2926, type: 3}
+  CraftingCanvas: {fileID: 0}

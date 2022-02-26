@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 [CreateAssetMenu(fileName = "New Complex Number", menuName = "ScriptableObjects/Complex Number")]
 public class ComplexNumberObject : ScriptableObject
@@ -12,7 +14,32 @@ public class ComplexNumberObject : ScriptableObject
         string text = ComplexNumber.real + " + " + ComplexNumber.imaginary + "i";
         return text;
     }
-    
+
+    private void OnEnable()
+    {
+        if(ComplexNumber.real == 0 || ComplexNumber.imaginary == 0)
+        {
+            ComplexNumber.real = Random.Range(3, 8);
+
+            ComplexNumber.imaginary = Random.Range(3, 8);
+
+            //10% chance of the Number object to have one component be 1 while the other doubles in value
+            if (Random.Range(1, 10) >= 10)
+            {
+                if (Random.Range(1, 2) == 1)
+                {
+                    ComplexNumber.real *= 2;
+                    ComplexNumber.imaginary = 1;
+                }
+                else
+                {
+
+                    ComplexNumber.real = 1;
+                    ComplexNumber.imaginary *= 2;
+                }
+            }
+        }
+    }
 }
 
 [System.Serializable]
@@ -58,22 +85,11 @@ public struct ComplexNumberData
             _factor1.real * _factor2.imaginary + _factor1.imaginary * _factor2.real);
     }
 
-    public static ComplexNumberData Multiply(List<ComplexNumberData> _factors)
+    public static ComplexNumberData Multiply(ComplexNumberData _factor1, ComplexNumberData _factor2,
+        ComplexNumberData _factor3)
     {
-        
-        ComplexNumberData result = new ComplexNumberData();
-        if (_factors.Count > 2)
-        {
-            //multiply mit funktion
-            var _shortenedFactors = new List<ComplexNumberData>(_factors);
-                _shortenedFactors.RemoveAt(_shortenedFactors.Count-1);
-            result = Add(result, Multiply(_shortenedFactors));
-        }
-        else
-        {
-            //multiply mit formel
-            result = Add(result, Multiply(_factors[0] ,_factors[1]));
-        }
+        var firstProduct = ComplexNumberData.Multiply(_factor1, _factor2);
+        var result = ComplexNumberData.Multiply(firstProduct, _factor3);
         return result;
     }
 }
