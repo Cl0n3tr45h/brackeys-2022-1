@@ -2059,14 +2059,27 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'idk
+  m_text: 'Snek (@SnekOfSpice)
 
-    wie rum wollen wir credits machen?
+    - Game Design
 
-    person ->  task
+    - Sprite Art
 
-    task
-    -> person'
+    - SFX Scouting
+
+
+    Jaa''m
+    (@c0vvb0yy)
+
+    - Lead Programmer
+
+
+    Jeanny?
+
+    - OST Composing
+
+    -
+    Animation'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ccbe82f681246b741a8a362310934160, type: 2}
   m_sharedMaterial: {fileID: -515841280906472206, guid: ccbe82f681246b741a8a362310934160, type: 2}
@@ -2204,17 +2217,17 @@ MonoBehaviour:
 
     W - Jump
 
-    Space - Hold to Hover
+    Space or W - Hold in mid-air
+    to Hover
 
 
-    Left
-    Click - Shoot
+    Left Click - Shoot
 
     Right Click - Blink
 
 
-    Q - Shift between Real and Imaginary
-    Plane'
+    Q - Shift between
+    Real and Imaginary Plane'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ccbe82f681246b741a8a362310934160, type: 2}
   m_sharedMaterial: {fileID: -515841280906472206, guid: ccbe82f681246b741a8a362310934160, type: 2}
@@ -2946,7 +2959,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -26.7, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1790410576
