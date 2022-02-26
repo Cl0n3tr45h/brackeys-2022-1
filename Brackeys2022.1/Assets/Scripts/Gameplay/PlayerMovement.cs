@@ -35,6 +35,8 @@ public class PlayerMovement : MonoBehaviour
 	private bool m_Dashing;
 	private bool m_AllowedToDash;
 	private float m_timer;
+
+	private static bool m_Active;
 	
 	private void Awake()
 	{
@@ -47,12 +49,17 @@ public class PlayerMovement : MonoBehaviour
 
 	private void Update()
 	{
+		if (GameLoop.gameState != GameState.FIGHT)
+		{
+			m_Rigidbody2D.gravityScale = 0;
+			return;
+		}
 		if (Input.GetKeyDown(KeyCode.W) && m_Grounded)
 		{
 			m_Jumping = true;
 		}
-		
-		if(Input.GetKeyDown(KeyCode.Space))
+
+		if (Input.GetKeyDown(KeyCode.Space))
 		{
 			//m_Rigidbody2D.gravityScale = 0.1f;
 			m_Rigidbody2D.drag = 25f;
@@ -75,6 +82,7 @@ public class PlayerMovement : MonoBehaviour
 
 	private void FixedUpdate()
 	{
+		if (GameLoop.gameState != GameState.FIGHT) return;
 		bool wasGrounded = m_Grounded;
 		bool wasDashing = m_Dashing;
 		m_Grounded = false;
@@ -82,7 +90,8 @@ public class PlayerMovement : MonoBehaviour
 		// The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
 		// This can be done using layers instead but Sample Assets will not overwrite your project settings.
 		RaycastHit hit;
-		if (Physics2D.Raycast((Vector2)m_GroundCheck.position, Vector2.down, .5f, m_WhatIsGround, -Mathf.Infinity, Mathf.Infinity))
+		if (Physics2D.Raycast((Vector2) m_GroundCheck.position, Vector2.down, .5f, m_WhatIsGround, -Mathf.Infinity,
+			Mathf.Infinity))
 		{
 			m_Grounded = true;
 		}
@@ -92,13 +101,14 @@ public class PlayerMovement : MonoBehaviour
 		}
 
 		horizontalInput = Input.GetAxisRaw("Horizontal") * m_RunSpeed;
-		
+
 		//if (Input.GetKey(KeyCode.Space) && m_AllowedToDash)
-		if(Input.GetMouseButton(1) && m_AllowedToDash)
+		if (Input.GetMouseButton(1) && m_AllowedToDash)
 		{
 			m_Dashing = true;
 			m_AllowedToDash = false;
 		}
+
 		if (Input.GetMouseButtonUp(1))
 		{
 			m_Dashing = false;
@@ -113,7 +123,7 @@ public class PlayerMovement : MonoBehaviour
 				m_timer = m_dashtimer;
 			}
 		}
-		
+
 
 		Move(horizontalInput * Time.fixedDeltaTime, m_Jumping, m_Dashing);
 		m_Jumping = false;

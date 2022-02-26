@@ -12,4 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d847ff3e4f53c240abc6a2839bef758, type: 3}
   m_Name: PlayerInventory
   m_EditorClassIdentifier: 
-  ComplexNumbers: []
+  ComplexNumbers:
+  - {fileID: 11400000, guid: dbd57169b2a7a524db16dd948f5d06e9, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}

@@ -6,7 +6,6 @@ using UnityEngine;
 public class Loot : MonoBehaviour
 {
     public GameLoop GameLoop;
-    public PlayerInventorySlotData data;
     public ComplexNumberObject ComplexNumber;
 
     public TextMeshProUGUI ValueText;
@@ -17,8 +16,4 @@ public class Loot : MonoBehaviour
         ValueText.text = ComplexNumber.ComplexNumber.real + "+" + ComplexNumber.ComplexNumber.imaginary + "i";
     }
 
-    public void AddToInventory()
-    {
-        GameLoop.InventoryObject.Add(ComplexNumber);
-    }
 }

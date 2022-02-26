@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Gun : MonoBehaviour
 {
@@ -25,7 +26,7 @@ public class Gun : MonoBehaviour
     public Transform BulletSpawn;
 
     public LayerMask WhatIsEnemy;
-    
+
     private Vector3 mousePos;
     // Start is called before the first frame update
     void Start()
@@ -80,12 +81,13 @@ public class Gun : MonoBehaviour
             //do the shooting
             shotIntervalTimer = 1/(currentFireRate*2);
             //currentMagSize--;
-           /* GameObject Bullet = Instantiate(BulletPrefab, BulletSpawn.position, Quaternion.identity);
-            //Bullet.transform.right = mousePos;
-            Bullet.GetComponent<bulletMovement>().ProjectileSpeed = currentProjectileSpeed;
-            Bullet.GetComponent<bulletMovement>().LifeTime = currentRange;
+           /* GameObject Bullet = Instantiate(BulletPrefab, Vector3.zero, Quaternion.identity, BulletSpawn);
+            Bullet.transform.right = -(transform.position-Mouse.GetMousePos(0));
+            var theScale = Bullet.transform.localScale;
+            theScale.x = currentRange;
             Debug.Log("I am doing " + currentDamage + " Damage owo");
             */
+           StartCoroutine("LaserLife");
            RaycastHit2D hit = Physics2D.Raycast(BulletSpawn.position, -(transform.position-Mouse.GetMousePos(0)).normalized, currentRange,
                WhatIsEnemy, Mathf.NegativeInfinity, Mathf.Infinity);
            if (hit.collider != null)
@@ -106,6 +108,15 @@ public class Gun : MonoBehaviour
         
     }
 
+    public IEnumerator LaserLife()
+    {
+        var Hue = Random.Range(0f, 1f);
+        BulletPrefab.GetComponent<SpriteRenderer>().color = Color.HSVToRGB(Hue, 1f, 1f, true);
+        BulletPrefab.SetActive(true);
+        yield return new WaitForSeconds(0.2f);
+        
+        BulletPrefab.SetActive(false);
+    }
     void CheckRotation()
     {
         if (!Player.m_FacingRight && transform.localScale.x > 0)

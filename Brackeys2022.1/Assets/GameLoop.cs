@@ -22,7 +22,7 @@ public class GameLoop : MonoBehaviour
     public GameObject Player;
     public Inventory InventoryObject;
     public static Inventory Inventory;
-    private static GameState gameState;
+    public static GameState gameState;
     [Space][Space] 
     [Header("Level Initialization")]
     public List<GameObject> Levels;
