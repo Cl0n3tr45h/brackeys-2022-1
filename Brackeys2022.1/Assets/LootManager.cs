@@ -7,14 +7,15 @@ using UnityEngine.UI;
 public class LootManager : MonoBehaviour
 {
     public List<ComplexNumberObject> SelectedLoot = new List<ComplexNumberObject>();
+    public ComplexOperand Operand;
     public Toggle[] Toggles;
     
     public void OnSetActive()
     {
-        
+        SelectedLoot = new List<ComplexNumberObject>();
+        Operand = new ComplexOperand();
         foreach (var toggle in Toggles)
         {
-            
             toggle.onValueChanged.AddListener(delegate
             {
                 OnValueChanged(toggle);
@@ -33,10 +34,11 @@ public class LootManager : MonoBehaviour
             ManageRemainingToggles(false);
         }
     }
-    // AT END
-    // übergeben Inventory => neue Werte
-    // ==> LIST
-    //LIST erstellt bei OnValueChanged
+
+    public void AddToInventory()
+    {
+        
+    }
 
     public void OnValueChanged( Toggle toggle)
     {

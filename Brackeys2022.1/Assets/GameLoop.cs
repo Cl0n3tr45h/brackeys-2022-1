@@ -133,8 +133,9 @@ public class GameLoop : MonoBehaviour
             GenerateLoot();
             lootGenerated = true;
         }
-        // StartCoroutine("CollectLoot");
     }
+
+    public GameObject OperandPrefab;
 
     public void GenerateLoot()
     {
@@ -149,12 +150,30 @@ public class GameLoop : MonoBehaviour
             LootManager.Toggles[i] = loot[i].transform.GetComponentInChildren<Toggle>();
         }
 
+        var operand = Instantiate(OperandPrefab, Vector3.zero, Quaternion.identity);
+        operand.transform.SetParent(OperandPanel.transform);
+        operand.transform.localPosition = Vector3.zero;
+        var lootOperand = operand.GetComponent<LootOperand>();
+        if (currentLevelIndex == 3 || currentLevelIndex == 6)
+            lootOperand.Operand.isAdd = false;
+        else
+            lootOperand.Operand.isAdd = true;
+        lootOperand.SetSprite();
         LootManager.OnSetActive();
+        
+        LootManager.Operand = lootOperand.Operand;
+        Debug.Log(LootManager.Operand.isAdd);
     }
 
-    public IEnumerator CollectLoot()
+    public void CollectLoot()
     {
-        yield return new WaitForSeconds(1f);
+        InventoryObject.AddNumbers(LootManager.SelectedLoot);
+        InventoryObject.AddOperand(LootManager.Operand);
+
+        LootCanvas.gameObject.SetActive(false);
+        
+        //gameState = GameState.CRAFT;
+        //lootGenerated = false;
     }
     public void CraftBehaviour()
     {

@@ -93,3 +93,21 @@ public struct ComplexNumberData
         return result;
     }
 }
+
+[System.Serializable]
+public struct ComplexOperand
+{
+    public bool isAdd;
+
+    public string Print()
+    {
+        if (isAdd)
+        {
+            return "+";
+        }
+        else
+        {
+            return "*";
+        }
+    }
+}
