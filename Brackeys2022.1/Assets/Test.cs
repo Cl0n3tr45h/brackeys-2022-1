@@ -20,7 +20,7 @@ public class Test : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.K))
         {
-            ph.TakeDamageReal(5);
+           // ph.TakeDamageReal(5);
         }   
     }
 }

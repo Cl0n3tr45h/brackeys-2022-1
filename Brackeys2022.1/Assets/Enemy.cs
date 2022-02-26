@@ -30,7 +30,8 @@ public class Enemy : MonoBehaviour
     public Transform BulletSpawn;
     public int BulletSpeed;
     public int BulletLifeTime;
-    
+
+    public Animator Animator;
     private EnemyState state;
 
     private Collider2D coll;
@@ -46,6 +47,9 @@ public class Enemy : MonoBehaviour
     public TeleportCollider[] TeleportColliders;
 
     public UnityEvent OnEnemyDeath;
+
+    private SpriteRenderer[] sprites;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -53,7 +57,10 @@ public class Enemy : MonoBehaviour
         Player = GameObject.FindWithTag("Player");
         state = EnemyState.IDLE;
         coll = GetComponentInChildren<Collider2D>();
+        sprites = GetComponentsInChildren<SpriteRenderer>();
         TeleportColliders = FindObjectsOfType<TeleportCollider>();
+        Animator = GetComponentInChildren<Animator>();
+        
         if (OnEnemyDeath == null)
         {
             OnEnemyDeath = new UnityEvent();
@@ -74,9 +81,13 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        LookAtPlayer();
         if (RealEnemy == PlaneShift.InReal)
         {
+            coll.isTrigger = false;
+            Animator.StopPlayback();
+            Shift(false);
+            
+            LookAtPlayer();
             switch (state)
             {
                 case EnemyState.IDLE:
@@ -95,10 +106,30 @@ public class Enemy : MonoBehaviour
         }
         else
         {
-            
+            Shift(true);
+            coll.isTrigger = true;
         }
     }
 
+    public void Shift(bool shifted)
+    {
+        if(shifted)
+        {
+            Animator.StartPlayback();
+            foreach (var sprite in sprites)
+            {
+                sprite.color = new Color(0.5f, 0.5f, 0.5f, 0.5f);
+            }
+        }
+        else
+        {
+            foreach (var sprite in sprites)
+            {
+                sprite.color = Color.white;
+            }
+        }
+    }
+    
     public void LookAtPlayer()
     {
         if (Player.transform.position.x > this.transform.position.x)
@@ -152,7 +183,9 @@ public class Enemy : MonoBehaviour
             {
                 //fuckn shoot
                 GameObject Bullet = Instantiate(BulletPrefab, BulletSpawn.position, Quaternion.identity);
-                Bullet.GetComponent<bulletMovement>().Direction = direction;
+                var bullet = Bullet.GetComponent<bulletMovement>();
+                    bullet.Direction = direction;
+                    bullet.IsReal = RealEnemy;
                 currentShootCount--;
                 state = EnemyState.IDLE;
             }
