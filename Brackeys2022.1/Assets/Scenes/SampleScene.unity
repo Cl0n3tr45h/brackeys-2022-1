@@ -1811,6 +1811,7 @@ GameObject:
   - component: {fileID: 621206521}
   - component: {fileID: 621206520}
   - component: {fileID: 621206519}
+  - component: {fileID: 621206523}
   m_Layer: 5
   m_Name: LootCanvas
   m_TagString: Untagged
@@ -1899,6 +1900,23 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &621206523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 621206518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3726ff09ee5b0a48a42af8ee1b6831c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SelectedLoot: []
+  Toggles:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1001 &689177818
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6006,6 +6024,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1704451259}
     m_Modifications:
+    - target: {fileID: 1860194465, guid: b805ac6de32637b4aa8b5a53d8cd2926, type: 3}
+      propertyPath: m_Colors.m_DisabledColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1860194465, guid: b805ac6de32637b4aa8b5a53d8cd2926, type: 3}
+      propertyPath: m_Colors.m_DisabledColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1860194465, guid: b805ac6de32637b4aa8b5a53d8cd2926, type: 3}
+      propertyPath: m_Colors.m_DisabledColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1860194465, guid: b805ac6de32637b4aa8b5a53d8cd2926, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 621206518}
     - target: {fileID: 2219171217640833962, guid: b805ac6de32637b4aa8b5a53d8cd2926, type: 3}
       propertyPath: GameLoop
       value: 
@@ -6098,6 +6132,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Loot
       objectReference: {fileID: 0}
+    - target: {fileID: 3760853633651657197, guid: b805ac6de32637b4aa8b5a53d8cd2926, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b805ac6de32637b4aa8b5a53d8cd2926, type: 3}
 --- !u!1001 &2889311755217660187
@@ -6171,6 +6209,10 @@ PrefabInstance:
       propertyPath: LootCanvas
       value: 
       objectReference: {fileID: 621206521}
+    - target: {fileID: 2889311755775214701, guid: 2c224f200f9465e418c79e0a89f45ac5, type: 3}
+      propertyPath: LootManager
+      value: 
+      objectReference: {fileID: 621206523}
     - target: {fileID: 2889311755775214701, guid: 2c224f200f9465e418c79e0a89f45ac5, type: 3}
       propertyPath: CraftingCanvas
       value: 
