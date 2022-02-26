@@ -38,12 +38,14 @@ public class PlayerMovement : MonoBehaviour
 
 	private static bool m_Active;
 	
+	private Animator a_animator;
 	private void Awake()
 	{
 		m_Rigidbody2D = GetComponent<Rigidbody2D>();
 		m_timer = m_dashtimer;
 		//	if (OnLandEvent == null)
 		//		OnLandEvent = new UnityEvent();
+		a_animator = GetComponentInChildren<Animator>();
 
 	}
 
@@ -165,6 +167,7 @@ public class PlayerMovement : MonoBehaviour
 			// Add a vertical force to the player.
 			m_Grounded = false;
 			m_Rigidbody2D.AddForce(new Vector2(m_Rigidbody2D.velocity.x, m_JumpForce));
+			a_animator.Play("jump");
 		}
 		//only control the player if grounded or airControl is turned on
 		if (m_Grounded)
@@ -173,6 +176,7 @@ public class PlayerMovement : MonoBehaviour
 			Vector3 targetVelocity = new Vector2(move * 10f, m_Rigidbody2D.velocity.y);
 			// And then smoothing it out and applying it to the character
 			m_Rigidbody2D.velocity = Vector3.SmoothDamp(m_Rigidbody2D.velocity, targetVelocity, ref m_Velocity, m_MovementSmoothing);
+			a_animator.SetFloat("speed",m_Rigidbody2D.velocity.x / m_RunSpeed);
 
 		}
 		else if (m_AirControl)
