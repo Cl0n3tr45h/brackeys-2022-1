@@ -91,6 +91,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 631
   TeleportColliders: []
+  OnEnemyDeath:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &3222659840041279899
 GameObject:
   m_ObjectHideFlags: 0
