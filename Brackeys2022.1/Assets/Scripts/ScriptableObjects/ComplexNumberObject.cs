@@ -58,6 +58,14 @@ public struct ComplexNumberData
         string text = real + " + " + imaginary + "i";
         return text;
     }
+
+    public string RichPrint()
+    {
+        string text = "<color=#d61517>" + real + "</color><color=white>+</color><color=#15D68D>" + imaginary + "i</color>";
+        return text;
+    }
+
+
     
     public static ComplexNumberData Add(ComplexNumberData _summand1, ComplexNumberData _summand2)
     {

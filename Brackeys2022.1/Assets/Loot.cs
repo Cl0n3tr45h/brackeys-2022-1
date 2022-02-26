@@ -13,7 +13,7 @@ public class Loot : MonoBehaviour
     void Start()
     {
         ComplexNumber = new ComplexNumberObject();
-        ValueText.text = ComplexNumber.ComplexNumber.real + "+" + ComplexNumber.ComplexNumber.imaginary + "i";
+        ValueText.text = ComplexNumber.ComplexNumber.RichPrint();
     }
 
 }
