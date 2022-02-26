@@ -54,7 +54,6 @@ public class Enemy : MonoBehaviour
         state = EnemyState.IDLE;
         coll = GetComponentInChildren<Collider2D>();
         TeleportColliders = FindObjectsOfType<TeleportCollider>();
-        Debug.Log(TeleportColliders.Length);
         if (OnEnemyDeath == null)
         {
             OnEnemyDeath = new UnityEvent();
@@ -69,12 +68,6 @@ public class Enemy : MonoBehaviour
         planeShift.OnShiftToImaginary?.AddListener(SetLayerMaskImaginary);
         
         GameLoop.SubscribeToEnemyEvent(OnEnemyDeath);
-    }
-
-    private void OnDisable()
-    {
-        planeShift.OnShiftToImaginary?.RemoveListener(SetLayerMaskImaginary);
-        planeShift.OnShiftToReal?.RemoveListener(SetLayerMaskReal);
     }
 
     // Update is called once per frame
@@ -216,8 +209,13 @@ public class Enemy : MonoBehaviour
     public void KillEnemy()
     {
         OnEnemyDeath.Invoke();
-        Destroy(this.gameObject);
+        
+        planeShift.OnShiftToImaginary?.RemoveListener(SetLayerMaskImaginary);
+        planeShift.OnShiftToReal?.RemoveListener(SetLayerMaskReal);
+        
+        GameLoop.UnSubscribeToEnemyEvent(OnEnemyDeath);
         //Do stuff for combos points loot etc
+        Destroy(this.gameObject);
     }
 
     public bool InCameraView()

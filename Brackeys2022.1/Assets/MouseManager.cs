@@ -6,6 +6,7 @@ public class MouseManager //manages where the mouse is in relation to inventory 
 {
     public static MouseControl holdControl;
     public static MouseControl hoverControl;
+    public static MouseCollect collectControl;
     
     public static void StartHold(MouseControl nodeControl)
     {
@@ -27,5 +28,15 @@ public class MouseManager //manages where the mouse is in relation to inventory 
     {
         if(hoverControl == mouseControl)
             hoverControl = null;
+    }
+    public static void EnterCollect(MouseCollect mouseControl)
+    {
+        collectControl = mouseControl;
+    }
+
+    public static void ExitCollect(MouseCollect mouseControl)
+    {
+        if(collectControl == mouseControl)
+            collectControl = null;
     }
 }
