@@ -9,6 +9,7 @@ public class LootManager : MonoBehaviour
     public List<ComplexNumberObject> SelectedLoot = new List<ComplexNumberObject>();
     public ComplexOperand Operand;
     public Toggle[] Toggles;
+    public Button NextLevelButton;
     
     public void OnSetActive()
     {
@@ -28,16 +29,18 @@ public class LootManager : MonoBehaviour
         if (SelectedLoot.Count >= 2)
         {
             ManageRemainingToggles(true);
+            ManageButton(true);
         }
         else
         {
             ManageRemainingToggles(false);
+            ManageButton(false);
         }
     }
 
-    public void AddToInventory()
+    public void ManageButton(bool _interactable)
     {
-        
+        NextLevelButton.interactable = _interactable;
     }
 
     public void OnValueChanged( Toggle toggle)
