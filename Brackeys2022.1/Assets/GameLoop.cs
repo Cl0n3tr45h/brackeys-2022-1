@@ -7,6 +7,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Rendering;
+using UnityEngine.UI;
 using Quaternion = UnityEngine.Quaternion;
 using Random = UnityEngine.Random;
 using Vector3 = UnityEngine.Vector3;
@@ -24,7 +25,6 @@ public class GameLoop : MonoBehaviour
     [Header("Player")]    
     public GameObject Player;
     public Inventory InventoryObject;
-    public static Inventory Inventory;
     public static GameState gameState;
     [Space][Space] 
     [Header("Level Initialization")]
@@ -52,6 +52,8 @@ public class GameLoop : MonoBehaviour
     public GameObject ComplexNumberPanel;
     public GameObject OperandPanel;
     public GameObject LootPrefab;
+    
+    public LootManager LootManager;
     private bool lootGenerated = false;
     
     [Space][Space] [Header("Crafting")] public Canvas CraftingCanvas;
@@ -68,7 +70,6 @@ public class GameLoop : MonoBehaviour
     {
         var random = new System.Random();
         levelSequence = Levels.OrderBy(item => random.Next()).ToList();
-        Inventory = InventoryObject;
     }
 
     // Start is called before the first frame update
@@ -89,7 +90,7 @@ public class GameLoop : MonoBehaviour
             case GameState.FIGHT:
                 FightBehaviour();
                 break;
-            //case GameState.LOOT:
+            case GameState.LOOT:
                LootBehaviour();
                 break;
             //case GameState.CRAFT:
@@ -145,8 +146,10 @@ public class GameLoop : MonoBehaviour
             loot[i] = Instantiate(LootPrefab, Vector3.zero, Quaternion.identity);
             loot[i].transform.SetParent(ComplexNumberPanel.transform);
             loot[i].transform.localPosition = Vector3.zero;
-            
+            LootManager.Toggles[i] = loot[i].transform.GetComponentInChildren<Toggle>();
         }
+
+        LootManager.OnSetActive();
     }
 
     public IEnumerator CollectLoot()
@@ -194,7 +197,8 @@ public class GameLoop : MonoBehaviour
         switch (currentLevelIndex)
         {
             case 0:
-                enemyToSpawn = 0;
+                enemyToSpawn = Random.Range(0, 2);
+                //enemyToSpawn = 0;
                 break;
             case 1:
                 enemyToSpawn = 1;

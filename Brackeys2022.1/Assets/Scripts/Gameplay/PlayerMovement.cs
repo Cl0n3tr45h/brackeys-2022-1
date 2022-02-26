@@ -61,13 +61,13 @@ public class PlayerMovement : MonoBehaviour
 			m_Jumping = true;
 		}
 
-		if (Input.GetKeyDown(KeyCode.Space))
+		if (Input.GetKeyDown(KeyCode.Space) || (Input.GetKeyDown(KeyCode.W) && !m_Grounded))
 		{
 			//m_Rigidbody2D.gravityScale = 0.1f;
 			m_Rigidbody2D.drag = 25f;
 		}
 
-		if (Input.GetKeyUp(KeyCode.Space))
+		if (Input.GetKeyUp(KeyCode.Space) || Input.GetKeyUp(KeyCode.W))
 		{
 			//m_Rigidbody2D.gravityScale = 2f;
 			m_Rigidbody2D.drag = 0f;

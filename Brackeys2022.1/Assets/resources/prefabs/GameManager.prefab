@@ -41,7 +41,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2889311755775214698}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f9dba9c324599f44eba3979c7bbe02df, type: 3}
   m_Name: 
@@ -61,6 +61,7 @@ MonoBehaviour:
     imaginary: 4
   - real: 2
     imaginary: 2
+  ph: {fileID: 0}
 --- !u!114 &2889311755775214703
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -107,7 +108,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 0}
-  InventoryObject: {fileID: 0}
+  InventoryObject: {fileID: 11400000, guid: 8bbabb1bffff96b44a829d9eaa599157, type: 2}
   Levels:
   - {fileID: 2416991128938042000, guid: 375caaf06afd7464b9979736adeb9299, type: 3}
   - {fileID: 3499406277528898350, guid: d8c620ab12fce2249aea2cde2db77df9, type: 3}
@@ -127,10 +128,20 @@ MonoBehaviour:
   - 3
   EnemiePrefabs:
   - {fileID: 3222659839379983617, guid: fdfd3f34066a7b24091bbfb4c1838fe6, type: 3}
-  - {fileID: 3222659839379983617, guid: fdfd3f34066a7b24091bbfb4c1838fe6, type: 3}
-  - {fileID: 3222659839379983617, guid: fdfd3f34066a7b24091bbfb4c1838fe6, type: 3}
+  - {fileID: 8968342465651932630, guid: 9aec4e556b741274486fd97d04418f3d, type: 3}
+  - {fileID: 5882420171455408849, guid: 0f56039b4dc3e554cae7fab5ed7936ff, type: 3}
   LootCanvas: {fileID: 0}
   ComplexNumberPanel: {fileID: 0}
   OperandPanel: {fileID: 0}
   LootPrefab: {fileID: 3760853633651657197, guid: b805ac6de32637b4aa8b5a53d8cd2926, type: 3}
   CraftingCanvas: {fileID: 0}
+  GameOverCanvas: {fileID: 0}
+  Text: {fileID: 0}
+  ReasonOfTerminationStrings:
+  - Gross incompetence.
+  - Unfinished training.
+  - Insufficient Weapons knowledge.
+  - Gave up on beet roots.
+  - Got too eager.
+  - Bested by Skullbird Elite.
+  - Faced Skullbird Armageddon.
