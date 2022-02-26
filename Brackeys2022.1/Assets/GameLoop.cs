@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Rendering;
@@ -14,7 +15,9 @@ public enum GameState
 {
     FIGHT,
     LOOT,
-    CRAFT
+    CRAFT,
+    DEAD,
+    WON
 }
 public class GameLoop : MonoBehaviour
 {
@@ -26,12 +29,13 @@ public class GameLoop : MonoBehaviour
     [Space][Space] 
     [Header("Level Initialization")]
     public List<GameObject> Levels;
-    private List<GameObject> levelSequence = new List<GameObject>();
+    private static List<GameObject> levelSequence = new List<GameObject>();
     private static int currentLevelIndex = 0;
     private static GameObject currentLevel;
     public int[] TargetKills;
     public static int[] TargetKillCount;
     private static int currentKillCount;
+    private static int allTimeKillCount;
     public float[] SpawnRate;
     private static float currentSpawnTimer;
 
@@ -51,6 +55,12 @@ public class GameLoop : MonoBehaviour
     private bool lootGenerated = false;
     
     [Space][Space] [Header("Crafting")] public Canvas CraftingCanvas;
+    [Space][Space] [Header("End")] 
+    public Canvas GameOverCanvas;
+
+    public TextMeshProUGUI Text;
+    public String[] ReasonOfTerminationStrings;
+    private static String[] ReasonOfTermination;
     //Combo
     //
 
@@ -79,12 +89,17 @@ public class GameLoop : MonoBehaviour
             case GameState.FIGHT:
                 FightBehaviour();
                 break;
-            case GameState.LOOT:
-                DespawnLevel();
-                SpawnLevel();
+            //case GameState.LOOT:
+               LootBehaviour();
                 break;
-            case GameState.CRAFT:
+            //case GameState.CRAFT:
                 CraftBehaviour();
+                break;
+            case GameState.DEAD:
+                EndGame();
+                break;
+            case GameState.WON:
+                WinGame();
                 break;
             default:
                 FightBehaviour();
@@ -169,7 +184,8 @@ public class GameLoop : MonoBehaviour
         {
             SpawnEnemy(i);   
         }
-        
+
+        currentKillCount = 0;
     }
 
     public static void SpawnEnemy(int _spawnPoint)
@@ -212,6 +228,10 @@ public class GameLoop : MonoBehaviour
         {
             Destroy(currentLevel);
             currentLevelIndex++;
+            if (currentLevelIndex >= levelSequence.Count)
+            {
+                gameState = GameState.WON;
+            }
         }
         else
         {
@@ -231,7 +251,7 @@ public class GameLoop : MonoBehaviour
     public static void EnemyDeath()
     {
         currentKillCount++;
-        Debug.Log(currentKillCount);
+        allTimeKillCount++;
         if (currentKillCount >= TargetKillCount[currentLevelIndex])
         {
             //Level geschafft
@@ -254,5 +274,18 @@ public class GameLoop : MonoBehaviour
         {
             Destroy(enemy);
         }
+    }
+
+    public void WinGame()
+    {
+        GameOverCanvas.gameObject.SetActive(true);
+        Text.text = "Skullbird Culling: successful.\nCongratulations.\n\nYou completed all 7 Levels";
+    }
+    
+    public void EndGame()
+    {
+        GameOverCanvas.gameObject.SetActive(true);
+        Text.text = "Skullbird Culling: terminated.\nReason of termination: " +
+                    ReasonOfTerminationStrings[currentLevelIndex] + "\n\n Reached Level: " + (currentLevelIndex+1) + " of 7";
     }
 }

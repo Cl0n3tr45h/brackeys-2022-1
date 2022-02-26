@@ -31,6 +31,7 @@ public class PlayerHealth : MonoBehaviour
         if (HealthActive <= 0)
         {
             //GAME OVER
+            GameLoop.gameState = GameState.DEAD;
         }
         //update UI
         UpdateUI();

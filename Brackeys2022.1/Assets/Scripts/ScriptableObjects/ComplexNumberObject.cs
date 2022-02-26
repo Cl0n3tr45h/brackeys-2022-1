@@ -28,14 +28,14 @@ public class ComplexNumberObject : ScriptableObject
             {
                 if (Random.Range(1, 2) == 1)
                 {
-                    ComplexNumber.real *= 2;
+                    ComplexNumber.real = Mathf.Max(ComplexNumber.real * 2, 12);
                     ComplexNumber.imaginary = 1;
                 }
                 else
                 {
 
                     ComplexNumber.real = 1;
-                    ComplexNumber.imaginary *= 2;
+                    ComplexNumber.imaginary = Mathf.Max(ComplexNumber.imaginary * 2, 12);;
                 }
             }
         }
