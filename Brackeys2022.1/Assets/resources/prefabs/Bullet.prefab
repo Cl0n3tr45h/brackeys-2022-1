@@ -45,9 +45,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc26c4818e26e0b4bb05d91d60519b39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ProjectileSpeed: 3
+  ProjectileSpeed: 2
   LifeTime: 13
-  Damage: 5
+  Damage: 22
   IsReal: 0
   Direction: {x: 0, y: 0, z: 0}
   WhatIsGround:

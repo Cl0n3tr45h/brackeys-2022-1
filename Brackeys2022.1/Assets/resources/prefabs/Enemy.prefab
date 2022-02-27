@@ -77,10 +77,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 0}
-  Health: 10
+  Health: 45
   RealEnemy: 1
-  ShootInterval: 1
-  TargetShootCount: 3
+  ShootInterval: 0.75
+  TargetShootCount: 2
   BulletPrefab: {fileID: 3854123371036295690, guid: d2b40798e8128884992000fd0e5e96af, type: 3}
   BulletSpawn: {fileID: 3222659838893989382}
   BulletSpeed: 2

@@ -128,7 +128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ProjectileSpeed: 3
-  LifeTime: 13
+  LifeTime: 10
   Damage: 5
   IsReal: 0
   Direction: {x: 0, y: 0, z: 0}

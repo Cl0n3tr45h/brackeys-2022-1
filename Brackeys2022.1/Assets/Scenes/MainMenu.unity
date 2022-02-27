@@ -2059,27 +2059,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Snek (@SnekOfSpice)
-
-    - Game Design
-
-    - Sprite Art
-
-    - SFX Scouting
-
-
-    Jaa''m
-    (@c0vvb0yy)
-
-    - Lead Programmer
-
-
-    Jeanny?
-
-    - OST Composing
-
-    -
-    Animation'
+  m_text: "Snek (@SnekOfSpice)\n- Game Design\n- Sprite Art\n- SFX Scouting (via
+    freesound.org)\n\nJaa'm (@c0vvb0yy)\n- Lead Programmer\n\nJeanny Walter\n- OST
+    Composing\n- Animation\n\n\rBreadley Sans font by Ardyana Types"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ccbe82f681246b741a8a362310934160, type: 2}
   m_sharedMaterial: {fileID: -515841280906472206, guid: ccbe82f681246b741a8a362310934160, type: 2}
