@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CraftingManager : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class CraftingManager : MonoBehaviour
 
     public void FillStatPanel(InventoryController _panel)
     {
+        Debug.Log("Pressed!" + _panel.gameObject.name);
         //no panel -> simple Zuweisung
         if (!ComplexStatPanel)
         {
@@ -22,22 +24,33 @@ public class CraftingManager : MonoBehaviour
                 ComplexStatPanel = null;
             }
             //panel gefüllt und Inventory slot ausgeählt -> wert Zuweisung
-            else if (PlayerInventorySlot != null && !PlayerInventorySlot.isUsed)
+            else if (PlayerInventorySlot != null )
             {
-                ComplexStatPanel.ComplexNumber = PlayerInventorySlot.ComplexNumber;
-                PlayerInventorySlot.isUsed = true;
-                ComplexStatPanel.Print();
-                PlayerInventorySlot.Hide();
-            }
-            else if(PlayerInventorySlot.isUsed)
-            {
-                ComplexStatPanel = _panel;
+                if(!PlayerInventorySlot.isUsed)
+                {
+                    ComplexStatPanel.ComplexNumber = PlayerInventorySlot.ComplexNumber;
+                    PlayerInventorySlot.isUsed = true;
+                    ComplexStatPanel.Print();
+                    PlayerInventorySlot.Hide();
+                }
+                else
+                {
+                    
+                    ComplexStatPanel = _panel;
+                }
             }
         }
     }
 
+    public void Subscribe(PlayerInventorySlotData _data)
+    {
+        _data.CraftButton.onClick.AddListener(delegate { GetInventorySlot(_data); });
+    }
+    
     public void GetInventorySlot(PlayerInventorySlotData _slot)
     {
+        
+        Debug.Log("Pressed Complex Number!" + _slot.gameObject.name);
         if (_slot.isUsed)
             return;
         if (!PlayerInventorySlot)

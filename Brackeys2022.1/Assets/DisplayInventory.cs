@@ -6,20 +6,19 @@ using UnityEngine.UI;
 
 public class DisplayInventory : MonoBehaviour
 {
-    public Inventory Inventory;
-
+    
     public GameObject NumberSlot;
 
     private static GameObject[] panels;
     // Start is called before the first frame update
     void Start()
     {
-        panels = new GameObject[Inventory.ComplexNumbers.Count];
-        for (int i = 0; i < Inventory.ComplexNumbers.Count; i++)
+        panels = new GameObject[PlayerInventoryManager.ComplexNumbers.Count];
+        for (int i = 0; i < PlayerInventoryManager.ComplexNumbers.Count; i++)
         {
             var slot = Instantiate(NumberSlot, this.transform);
-            slot.GetComponentInChildren<TextMeshProUGUI>().text = Inventory.ComplexNumbers[i].Print();
-            slot.GetComponentInChildren<PlayerInventorySlotData>().ComplexNumber = Inventory.ComplexNumbers[i];
+            slot.GetComponentInChildren<TextMeshProUGUI>().text = PlayerInventoryManager.ComplexNumbers[i].Print();
+            slot.GetComponentInChildren<PlayerInventorySlotData>().ComplexNumber = PlayerInventoryManager.ComplexNumbers[i];
             panels[i] = slot;
         }
     }

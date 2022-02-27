@@ -24,7 +24,8 @@ public class GameLoop : MonoBehaviour
 {
     [Header("Player")]    
     public GameObject Player;
-    public Inventory InventoryObject;
+    //public Inventory InventoryObject;
+    public PlayerInventoryManager InventoryObject;
     public static GameState gameState;
     [Space][Space] 
     [Header("Level Initialization")]
@@ -170,6 +171,7 @@ public class GameLoop : MonoBehaviour
         InventoryObject.AddNumbers(LootManager.SelectedLoot);
         InventoryObject.AddOperand(LootManager.Operand);
 
+        Debug.Log(InventoryObject.Print());
         LootCanvas.gameObject.SetActive(false);
         
         gameState = GameState.CRAFT;
