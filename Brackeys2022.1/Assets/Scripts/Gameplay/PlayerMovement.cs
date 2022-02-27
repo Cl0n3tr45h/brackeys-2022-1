@@ -54,7 +54,15 @@ public class PlayerMovement : MonoBehaviour
 		if (GameLoop.gameState != GameState.FIGHT)
 		{
 			m_Rigidbody2D.gravityScale = 0;
+			m_Grounded = false;
+			m_Dashing = false;
+			horizontalInput = 0;
 			return;
+		}
+
+		if (m_Rigidbody2D.gravityScale == 0)
+		{
+			m_Rigidbody2D.gravityScale = 2;
 		}
 		if (Input.GetKeyDown(KeyCode.W) && m_Grounded)
 		{

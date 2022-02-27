@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class ReturnToMainMenu : MonoBehaviour
 {
-    public string MainMenuSceneName;
+    public int MainMenuSceneName;
     private void Update()
     {
         if (Input.GetMouseButtonDown(0))

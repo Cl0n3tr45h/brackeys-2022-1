@@ -42,6 +42,7 @@ public class GameLoop : MonoBehaviour
     public GameObject[] EnemiePrefabs;
     private static GameObject[] Enemies;
     private static List<GameObject> activeEnemies = new List<GameObject>();
+    private static List<bulletMovement> activeBullets = new List<bulletMovement>();
     private static List<Transform> enemySpawnPoints = new List<Transform>();
     private static float enemyCount;
     private static float enemyInReal;
@@ -53,6 +54,8 @@ public class GameLoop : MonoBehaviour
     public GameObject OperandPanel;
     public GameObject LootPrefab;
 
+    public GameObject OperandPrefab;
+    
     public Canvas UpgradeCanvas;
     
     public LootManager LootManager;
@@ -69,6 +72,7 @@ public class GameLoop : MonoBehaviour
     //Combo
     //
 
+    public GunStats InGameUI;
 
 
 
@@ -91,6 +95,10 @@ public class GameLoop : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Pause();
+        }
         switch (gameState)
         {
             case GameState.FIGHT:
@@ -111,11 +119,21 @@ public class GameLoop : MonoBehaviour
         }
     }
 
+    public GameObject PauseCanvas;
+    public void Pause()
+    {
+        PauseCanvas.SetActive(!PauseCanvas.activeSelf);
+    }
+
     public void FightBehaviour()
     {
         //Count down kill count
         //Combo stuff?
         //Points
+        if (!InGameUI.isActiveAndEnabled)
+        {
+            InGameUI.gameObject.SetActive(true);
+        }
         if (currentSpawnTimer >= SpawnRate[currentLevelIndex])
         {   //then we spawn
                      
@@ -132,6 +150,7 @@ public class GameLoop : MonoBehaviour
     {
         if (!upgradesGenerated)
         {
+            InGameUI.gameObject.SetActive(false);
             UpgradeCanvas.gameObject.SetActive(true);
             UpgradeCanvas.GetComponent<UpgradeManager>().GenerateUpgrades();
             upgradesGenerated = true;
@@ -144,7 +163,8 @@ public class GameLoop : MonoBehaviour
         UpgradeCanvas.gameObject.SetActive(false);
         Debug.Log("finished upgrading");
         upgradesGenerated = false;
-
+        DespawnLevel();
+        SpawnLevel();
         gameState = GameState.FIGHT;
     }
 
@@ -157,8 +177,6 @@ public class GameLoop : MonoBehaviour
             lootGenerated = true;
         }
     }
-
-    public GameObject OperandPrefab;
 
     public void GenerateLoot()
     {
@@ -199,10 +217,10 @@ public class GameLoop : MonoBehaviour
         gameState = GameState.CRAFT;
         lootGenerated = false;
     }*/
-    public void CraftBehaviour()
+    /*public void CraftBehaviour()
     {
         CraftingCanvas.gameObject.SetActive(true);
-    }
+    }*/
 
     public void SpawnLevel()
     {
@@ -275,9 +293,14 @@ public class GameLoop : MonoBehaviour
         {
             Destroy(currentLevel);
             currentLevelIndex++;
+            
             if (currentLevelIndex >= levelSequence.Count)
             {
                 gameState = GameState.WON;
+            }
+            else
+            {
+                gameState = GameState.UPGRADE;
             }
         }
         else
@@ -295,16 +318,31 @@ public class GameLoop : MonoBehaviour
         _event?.RemoveListener(EnemyDeath);
     }
 
+    public static void AddBullet(bulletMovement _bullet)
+    {
+        if (!activeBullets.Contains(_bullet))
+        {
+            activeBullets.Add(_bullet);
+        }
+    }
+    public static void RemoveBullet(bulletMovement _bullet)
+    {
+        if (activeBullets.Contains(_bullet))
+        {
+            activeBullets.Remove(_bullet);
+        }
+    }
+
     public static void EnemyDeath()
     {
         currentKillCount++;
         allTimeKillCount++;
+        updateUIText();
         if (currentKillCount >= TargetKillCount[currentLevelIndex])
         {
             //Level geschafft
             ClearRemainingEnemies();
             DespawnLevel();
-            gameState = GameState.UPGRADE;
             Debug.Log("Finished");
         }
         else
@@ -316,18 +354,34 @@ public class GameLoop : MonoBehaviour
         }
     }
 
+    public static TextMeshProUGUI UIText;
+
+    public static void updateUIText()
+    {
+        if (!UIText)
+        {
+            UIText = GameObject.Find("InGameUI").transform.GetChild(2).GetComponent<TextMeshProUGUI>();
+        }
+        UIText.text = "Enemies killed: " + currentKillCount + "/" + TargetKillCount[currentLevelIndex];
+        UIText.text += "\nLevel: " + currentLevelIndex + "/7";
+    }
     public static void ClearRemainingEnemies()
     {
         foreach (var enemy in activeEnemies)
         {
             Destroy(enemy);
         }
+
+        foreach (var bullet in activeBullets)
+        {
+            Destroy(bullet);
+        }
     }
 
     public void WinGame()
     {
         GameOverCanvas.gameObject.SetActive(true);
-        Text.text = "Skullbird Culling: successful.\nCongratulations.\n\nYou completed all 7 Levels";
+        Text.text = "Skullbird Culling: successful.\nCongratulations.\n\nYou completed all 7 Levels\n\n\n (press esp to return to main menu)";
     }
     
     public void EndGame()

@@ -27,6 +27,7 @@ public class bulletMovement : MonoBehaviour
     {
         currentLifeTime = 0;
         Sprite = GetComponentInChildren<SpriteRenderer>();
+        GameLoop.AddBullet(this);
     }
 
     // Update is called once per frame
@@ -67,12 +68,15 @@ public class bulletMovement : MonoBehaviour
         if (other.gameObject.tag == "Player" && plane)
         {
             other.gameObject.GetComponent<PlayerHealth>().TakeDamageReal(Damage);
+            GameLoop.RemoveBullet(this);
             Destroy(this.gameObject);
         }
 
         if (other.gameObject.layer == WhatIsGround)
         {
+            GameLoop.RemoveBullet(this);
             Destroy(this);
         }
     }
+
 }

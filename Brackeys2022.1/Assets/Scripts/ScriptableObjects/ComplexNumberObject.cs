@@ -53,6 +53,37 @@ public struct ComplexNumberData
         real = _real;
         imaginary = _imaginary;
     }
+
+    public ComplexNumberData(bool _randomGenerate)
+    {
+        if (_randomGenerate)
+        {
+            real = Random.Range(3, 8);
+
+            imaginary = Random.Range(3, 8);
+
+            //10% chance of the Number object to have one component be 1 while the other doubles in value
+            if (Random.Range(1, 10) >= 10)
+            {
+                if (Random.Range(1, 2) == 1)
+                {
+                    real = Mathf.Max(real * 2, 12);
+                    imaginary = 1;
+                }
+                else
+                {
+
+                    real = 1;
+                    imaginary = Mathf.Max(imaginary * 2, 12);;
+                }
+            }
+        }
+        else
+        {
+            real = 5;
+            imaginary = 5;
+        }
+    }
     public string Print()
     {
         string text = real + " + " + imaginary + "i";

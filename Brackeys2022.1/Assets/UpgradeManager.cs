@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,7 +6,12 @@ using UnityEngine.UI;
 using TMPro;
 
 
-public enum upgradeOptions{DAMAGE, RANGE, FIRERATE}
+public enum upgradeOptions
+{
+    DAMAGE,
+    RANGE, 
+    FIRERATE
+}
 public class UpgradeManager : MonoBehaviour
 {
     public upgradeOptions options;
@@ -14,7 +20,7 @@ public class UpgradeManager : MonoBehaviour
 
         // upgrade behavior
     private int remainingChoiceCount;
-    public int upgradeChoiceCount;
+    public int UpgradeChoiceCount;
     public TextMeshProUGUI textDamage;
     public TextMeshProUGUI textRange;
     public TextMeshProUGUI textFireRate;
@@ -23,48 +29,127 @@ public class UpgradeManager : MonoBehaviour
     public Button btnDamage;
     public Button btnRange;
     public Button btnFireRate;
+    public Button BtnNextLvl;
     
-    private List<ComplexNumberData> availableChoices;
+    private List<ComplexNumberData> availableChoices = new List<ComplexNumberData>();
 
 
-    public void Update(){
-        if (availableChoices != null){
-        if (this.gameObject.activeSelf)
+    private void OnEnable()
+    {
+        
+        textChoices.gameObject.SetActive(true);
+        SetTexts();
+        SetButtons(true);
+    }
+
+    public void SetTexts()
+    {
+        
+        textDamage.text = "Damage: "+gun.Damage.RichPrint();
+        textRange.text = "Range: "+gun.Range.RichPrint();
+        textFireRate.text = "Fire Rate: "+gun.FireRate.RichPrint();
+    }
+
+    public void SetUpgradeQueueText()
+    {
+        textChoices.text = "Current Upgrade: \n";
+        foreach (var number in availableChoices)
         {
-            textDamage.text = gun.Damage.Print();
-
-
-            var a = "";
-            for (var i = 0; i < upgradeChoiceCount; i++)
-            {
-                if (i == 0)
-                    a += "Current Upgrade: ";
-                else
-                    a += "Next Upgrade: ";
-
-                var item = availableChoices[i];
-
-                a += item.Print();
-                a += "\n";
-            }
-            textChoices.text = a;
+            
+            textChoices.text += ("Next Upgrade: "+number.RichPrint());
         }
-        }
+    }
+    
+    public void Update(){
+        
+        
+        // if (availableChoices != null){
+        //     if (this.gameObject.activeSelf)
+        //     {
+        //         textDamage.text = gun.Damage.Print();
+        //
+        //
+        //         var a = "";
+        //         for (var i = 0; i < upgradeChoiceCount; i++)
+        //         {
+        //             if (i == 0)
+        //                 a += "Current Upgrade: ";
+        //             else
+        //                 a += "Next Upgrade: ";
+        //
+        //             var item = availableChoices[i];
+        //
+        //             a += item.Print();
+        //             a += "\n";
+        //         }
+        //         textChoices.text = a;
+        //     }
+        // }
     }
     public void GenerateUpgrades()
     {
-        for (int i = 0; i < upgradeChoiceCount; i++)
+        availableChoices = new List<ComplexNumberData>();
+        textChoices.text = "Current Upgrade: ";
+        for (int i = 0; i < UpgradeChoiceCount; i++)
         {
-            Debug.Log("Gener");
-            ComplexNumberObject newNumber = new ComplexNumberObject();
-            if (availableChoices == null)
-                availableChoices = new List<ComplexNumberData>();
-            availableChoices.Add(newNumber.ComplexNumber);
-            Debug.Log(newNumber.Print());
+            ComplexNumberData newNumber = new ComplexNumberData(true);
+            availableChoices.Add(newNumber);
+            textChoices.text += ("\n"+newNumber.RichPrint()+"\nNextUpgrade: ");
         }
     }
 
-    public void upgradeGunAtStatWith(int _stat, ComplexNumberData add)
+    public void ButtonClick(int _stat)
+    {
+        //Button needs to know what stat
+        /*switch (_stat)
+        {
+            case upgradeOptions.DAMAGE:
+                gun.Damage = ComplexNumberData.Add(gun.Damage, availableChoices[0]);
+                break;
+            case upgradeOptions.RANGE:
+                gun.Range = ComplexNumberData.Add(gun.Range, availableChoices[0]);
+                break;
+            case upgradeOptions.FIRERATE:
+                gun.FireRate = ComplexNumberData.Add(gun.FireRate, availableChoices[0]);
+                break;    
+            default:
+                Debug.LogError("NO GUN STAT CORRESPONDING TO UPGRADE BUTTON");
+                break;
+        }*/
+        switch (_stat)
+        {
+            case 0 :
+                gun.Damage = ComplexNumberData.Add(gun.Damage, availableChoices[0]);
+                break;
+            case 1:
+                gun.Range = ComplexNumberData.Add(gun.Range, availableChoices[0]);
+                break;
+            case 2:
+                gun.FireRate = ComplexNumberData.Add(gun.FireRate, availableChoices[0]);
+                break;    
+            default:
+                Debug.LogError("NO GUN STAT CORRESPONDING TO UPGRADE BUTTON");
+                break;
+        }
+        SetTexts();
+        SetUpgradeQueueText();
+        availableChoices.RemoveAt(0);
+        if (availableChoices.Count <= 0)
+        {
+            SetButtons(false);
+        }
+    }
+
+    public void SetButtons(bool _active)
+    {
+        textChoices.gameObject.SetActive(_active);
+        btnDamage.interactable = _active;
+        btnRange.interactable = _active;
+        btnFireRate.interactable = _active;
+        BtnNextLvl.interactable = !_active;
+    }
+    
+    /*public void upgradeGunAtStatWith(int _stat, ComplexNumberData add)
     {
         switch (_stat)
         {
@@ -87,8 +172,9 @@ public class UpgradeManager : MonoBehaviour
             default:
                 break;
     }
-    }
+    }*/
 
+    /*
     public void upgradeGun(int _stat)
     {
         if (availableChoices.Count > 0)
@@ -113,5 +199,5 @@ public class UpgradeManager : MonoBehaviour
             btnRange.gameObject.SetActive(false);
             btnFireRate.gameObject.SetActive(false);
         }
-    }
+    }*/
 }
