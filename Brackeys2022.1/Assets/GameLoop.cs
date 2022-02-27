@@ -231,7 +231,7 @@ public class GameLoop : MonoBehaviour
         {
             Player.SetActive(true);
         }
-        updateUIText();
+        //updateUIText();
         //Get player spawn
         Player.transform.SetPositionAndRotation(GameObject.Find("PlayerSpawn").transform.position, Quaternion.identity);
         
@@ -248,10 +248,12 @@ public class GameLoop : MonoBehaviour
         for (int i = 0; i < enemySpawnPoints.Count; i++)
         {
             SpawnEnemy(i);   
-            FindObjectOfType<AudioManager>().Play("EnemySpawn");
+            //FindObjectOfType<AudioManager>().Play("EnemySpawn");
         }
 
         currentKillCount = 0;
+        
+        MusicManager.OnNewLevel(currentLevelIndex);
     }
 
     public static void SpawnEnemy(int _spawnPoint)
@@ -339,7 +341,7 @@ public class GameLoop : MonoBehaviour
     {
         currentKillCount++;
         allTimeKillCount++;
-        updateUIText();
+        //updateUIText();
         if (currentKillCount >= TargetKillCount[currentLevelIndex])
         {
             //Level geschafft
@@ -358,7 +360,7 @@ public class GameLoop : MonoBehaviour
 
     public static TextMeshProUGUI UIText;
 
-    public static void updateUIText()
+    /*public static void updateUIText()
     {
         if (!UIText)
         {
@@ -366,7 +368,7 @@ public class GameLoop : MonoBehaviour
         }
         UIText.text = "Enemies killed: " + currentKillCount + "/" + TargetKillCount[currentLevelIndex];
         UIText.text += "\nLevel: " + currentLevelIndex + "/7";
-    }
+    }*/
     public static void ClearRemainingEnemies()
     {
         foreach (var enemy in activeEnemies)

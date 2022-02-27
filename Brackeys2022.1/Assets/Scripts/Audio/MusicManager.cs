@@ -5,8 +5,9 @@ using UnityEngine;
 
 public class MusicManager : MonoBehaviour
 {
-    public AudioClip defaultTrack;
-    private AudioSource track01, track02;
+    public AudioClip[] TracksObject;
+    public static AudioClip[] Tracks;
+    public static AudioSource track01, track02;
     private bool isPlayingtrack01;
 
     public static MusicManager instance;
@@ -23,15 +24,27 @@ public class MusicManager : MonoBehaviour
 
     private void Start()
     {
+        Tracks = new AudioClip[TracksObject.Length];
+        for (int i = 0; i < Tracks.Length; i++)
+        {
+            Tracks[i] = TracksObject[i];
+        }
         track01 = gameObject.AddComponent<AudioSource>();
         track02 = gameObject.AddComponent<AudioSource>();
        // Destroy(gameObject.AddComponent<AudioSource>());
         isPlayingtrack01 = true;
-        
-        SwapTrack(defaultTrack);
+        track01.clip = Tracks[0];
+        //SwapTrack(defaultTrack);
     }
 
-    public void SwapTrack(AudioClip newClip)
+    public static void OnNewLevel(int _levelIndex)
+    {
+        track01.Stop();
+        track01.clip = Tracks[_levelIndex % 2];
+        track01.Play();
+    }
+
+    /*public void SwapTrack(AudioClip newClip)
     {
         if (isPlayingtrack01)
         {
@@ -52,5 +65,5 @@ public class MusicManager : MonoBehaviour
     public void ReturnToDefault()
     {
         SwapTrack(defaultTrack);
-    }
+    }*/
 }

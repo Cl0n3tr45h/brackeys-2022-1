@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 public class MusicSwap : MonoBehaviour
 {
-    public AudioClip nextTrack;
+    /*public AudioClip nextTrack;
 
     void Update()
     {
@@ -17,5 +17,5 @@ public class MusicSwap : MonoBehaviour
         {
             MusicManager.instance.ReturnToDefault();
         }
-    }
+    }*/
 }
