@@ -46,97 +46,115 @@ MonoBehaviour:
   sounds:
   - name: ButtonHover
     clip: {fileID: 8300000, guid: 589d4785160823544bfd70b433bd290b, type: 3}
-    volume: 0.25
+    volume: 0.5
     pitch: 1
     loop: 0
     source: {fileID: 0}
-  - name: ButtonClick
+  - name: ButonClick
     clip: {fileID: 8300000, guid: 52a3a1c33b3796b4796e9c41f8bcc6df, type: 3}
-    volume: 0.25
+    volume: 0.5
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: ShiftPlane
     clip: {fileID: 8300000, guid: c93c06a7a42648043a02cd3c8b20cfad, type: 3}
-    volume: 0
-    pitch: 0
+    volume: 0.5
+    pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: HoverInAir
     clip: {fileID: 8300000, guid: 0f5f8e44d9d032f4a809b9a289d23fd6, type: 3}
-    volume: 0
-    pitch: 0
+    volume: 0.5
+    pitch: 1
     loop: 0
     source: {fileID: 0}
-  - name: Shoot
+  - name: PlayerShoot
     clip: {fileID: 8300000, guid: 3d95f4087a57058458f878e06a6b53c1, type: 3}
-    volume: 0
-    pitch: 0
+    volume: 0.5
+    pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: LevelComplete
     clip: {fileID: 8300000, guid: f7c49b6ee585b0e43bd08cb8e023d3ed, type: 3}
-    volume: 0
-    pitch: 0
+    volume: 0.5
+    pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: GameWon
     clip: {fileID: 8300000, guid: 71e00eb82af9b30418e308938ba74cf1, type: 3}
-    volume: 0
-    pitch: 0
+    volume: 0.5
+    pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: PlayerDeath
     clip: {fileID: 8300000, guid: 896f912fe45ae4b4db0fd1a8480769e5, type: 3}
-    volume: 0
-    pitch: 0
+    volume: 0.5
+    pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: EnemySpawn
     clip: {fileID: 8300000, guid: ed8b3d4ddd1ffdd45a5f353c64e9bb5c, type: 3}
-    volume: 0
-    pitch: 0
+    volume: 0.5
+    pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: EnemyTeleport
     clip: {fileID: 8300000, guid: c6983db9819f864489c1a10cc0b39f64, type: 3}
-    volume: 0
-    pitch: 0
+    volume: 0.5
+    pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: EnemyHit
     clip: {fileID: 8300000, guid: 07eb9e2848738f54aaa78874a6d7f8f6, type: 3}
-    volume: 0
-    pitch: 0
+    volume: 0.5
+    pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: EnemyDie
     clip: {fileID: 8300000, guid: eb588d365372f9745b8852ac96c3ca06, type: 3}
-    volume: 0
-    pitch: 0
+    volume: 0.5
+    pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: EnemyShoot
     clip: {fileID: 8300000, guid: 0a2dc53c381cf5b4d9638a6a4907bce3, type: 3}
-    volume: 0
-    pitch: 0
+    volume: 0.5
+    pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: CraftingAddStat
     clip: {fileID: 8300000, guid: b0e6f443764100942ba4ce698d1ee8b0, type: 3}
-    volume: 0
-    pitch: 0
+    volume: 0.5
+    pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: CraftingRemoveStat
     clip: {fileID: 8300000, guid: ae45d36f61d3ebd4ab7553e741ee5ec4, type: 3}
-    volume: 0
-    pitch: 0
+    volume: 0.5
+    pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: PlayerHit
     clip: {fileID: 8300000, guid: 5859e0d8469485e4a91ed955964d13bd, type: 3}
-    volume: 0
-    pitch: 0
+    volume: 0.5
+    pitch: 1
     loop: 0
+    source: {fileID: 0}
+  - name: MenuBGMusic
+    clip: {fileID: 8300000, guid: 9db2a2844ef77de4e9fc0354d33472f9, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: RealBGMusic
+    clip: {fileID: 8300000, guid: 4f3803ff367280245b77735982d9507b, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: ImaginaryBGMusic
+    clip: {fileID: 8300000, guid: 2178b796cf7073c4b917f52f32ed630d, type: 3}
+    volume: 0
+    pitch: 1
+    loop: 1
     source: {fileID: 0}
