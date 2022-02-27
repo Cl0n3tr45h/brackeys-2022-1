@@ -5,10 +5,16 @@ using UnityEngine;
 
 public class PlayerInventorySlotData : MonoBehaviour
 {
-    public ComplexNumberObject ComplexNumberObject;
+    public ComplexNumberObject ComplexNumber;
+    public bool isUsed;
 
     private void Start()
     {
-        ComplexNumberObject = ScriptableObject.Instantiate(ComplexNumberObject);
+        //ComplexNumber = ScriptableObject.Instantiate(ComplexNumber);
+    }
+
+    public void Hide()
+    {
+        this.gameObject.SetActive(false);
     }
 }

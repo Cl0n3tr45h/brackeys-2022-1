@@ -19,7 +19,7 @@ public class DisplayInventory : MonoBehaviour
         {
             var slot = Instantiate(NumberSlot, this.transform);
             slot.GetComponentInChildren<TextMeshProUGUI>().text = Inventory.ComplexNumbers[i].Print();
-            slot.GetComponentInChildren<PlayerInventorySlotData>().ComplexNumberObject = Inventory.ComplexNumbers[i];
+            slot.GetComponentInChildren<PlayerInventorySlotData>().ComplexNumber = Inventory.ComplexNumbers[i];
             panels[i] = slot;
         }
     }

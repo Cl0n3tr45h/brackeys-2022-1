@@ -44,7 +44,7 @@ public class MouseControl : MonoBehaviour
             isHeld = false;
             if (InventoryManager.hoverControl != null) //Complex number gets saved to inventory Slot if let go over such
             {
-                InventoryManager.hoverControl.ComplexNumber = slotData.ComplexNumberObject;
+                InventoryManager.hoverControl.ComplexNumber = slotData.ComplexNumber;
                 this.gameObject.transform.SetParent(InventoryManager.hoverControl.gameObject.transform);
             }
             else

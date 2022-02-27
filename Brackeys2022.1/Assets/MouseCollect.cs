@@ -26,7 +26,7 @@ public class MouseCollect : MonoBehaviour
         bool onSlot = Mouse.MouseHover(collider);
         if (Input.GetMouseButtonDown(0) && onSlot)
         {
-            GameLoop.InventoryObject.Add(slotData.ComplexNumberObject);
+            GameLoop.InventoryObject.Add(slotData.ComplexNumber);
         }
         if (onSlot)
         {

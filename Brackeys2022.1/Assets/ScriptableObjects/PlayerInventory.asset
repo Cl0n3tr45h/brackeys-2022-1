@@ -13,7 +13,13 @@ MonoBehaviour:
   m_Name: PlayerInventory
   m_EditorClassIdentifier: 
   ComplexNumbers:
-  - {fileID: 11400000, guid: dbd57169b2a7a524db16dd948f5d06e9, type: 2}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  ComplexOperands:
+  - isAdd: 1
+  - isAdd: 1
+  - isAdd: 1

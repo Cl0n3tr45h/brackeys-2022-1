@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ComplexNumber:
     real: 4
-    imaginary: 4
+    imaginary: 6

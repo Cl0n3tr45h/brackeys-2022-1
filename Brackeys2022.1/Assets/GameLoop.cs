@@ -93,7 +93,7 @@ public class GameLoop : MonoBehaviour
             case GameState.LOOT:
                LootBehaviour();
                 break;
-            //case GameState.CRAFT:
+            case GameState.CRAFT:
                 CraftBehaviour();
                 break;
             case GameState.DEAD:
@@ -172,12 +172,12 @@ public class GameLoop : MonoBehaviour
 
         LootCanvas.gameObject.SetActive(false);
         
-        //gameState = GameState.CRAFT;
-        //lootGenerated = false;
+        gameState = GameState.CRAFT;
+        lootGenerated = false;
     }
     public void CraftBehaviour()
     {
-        
+        CraftingCanvas.gameObject.SetActive(true);
     }
 
     public void SpawnLevel()
