@@ -10,7 +10,7 @@ public class PlayerInventorySlotData : MonoBehaviour
     public bool isUsed;
 
     public Button CraftButton;
-    public CraftingManager CraftingManager;
+    public GameObject CraftingManager;
     private void Start()
     {
         //ComplexNumber = ScriptableObject.Instantiate(ComplexNumber);
@@ -18,7 +18,7 @@ public class PlayerInventorySlotData : MonoBehaviour
 
     public void OnSetActive()
     {
-        CraftingManager.Subscribe(this);
+        CraftingManager.GetComponent<CraftingManager>().Subscribe(this);
     }
 
     public void Hide()

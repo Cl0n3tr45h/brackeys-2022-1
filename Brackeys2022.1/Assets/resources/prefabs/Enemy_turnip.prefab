@@ -179,7 +179,7 @@ MonoBehaviour:
   RealEnemy: 1
   ShootInterval: 1
   TargetShootCount: 3
-  BulletPrefab: {fileID: 5266692589300349521, guid: be0b590992489834592abc3aa945beca, type: 3}
+  BulletPrefab: {fileID: 4527175923962885458, guid: 93d09be85e4e2de42a9e78b313ae1576, type: 3}
   BulletSpawn: {fileID: 8968342466405281489}
   BulletSpeed: 2
   BulletLifeTime: 4

@@ -18,8 +18,10 @@ public class bulletMovement : MonoBehaviour
     public Vector3 Direction;
 
     private SpriteRenderer Sprite;
-
+    
     private bool plane;
+
+    public LayerMask WhatIsGround;
     // Start is called before the first frame update
     void OnEnable()
     {
@@ -66,6 +68,11 @@ public class bulletMovement : MonoBehaviour
         {
             other.gameObject.GetComponent<PlayerHealth>().TakeDamageReal(Damage);
             Destroy(this.gameObject);
+        }
+
+        if (other.gameObject.layer == WhatIsGround)
+        {
+            Destroy(this);
         }
     }
 }

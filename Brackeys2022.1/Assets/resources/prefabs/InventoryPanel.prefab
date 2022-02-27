@@ -92,6 +92,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ComplexNumber: {fileID: 0}
   isUsed: 0
+  CraftButton: {fileID: 8069998838455339167}
+  CraftingManager: {fileID: 70287929132612967, guid: cdf5b4d31dabdf0449edb27a6269f78b, type: 3}
 --- !u!1 &2828909671224584161
 GameObject:
   m_ObjectHideFlags: 0

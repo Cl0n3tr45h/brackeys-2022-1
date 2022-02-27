@@ -48,7 +48,11 @@ MonoBehaviour:
   ProjectileSpeed: 3
   LifeTime: 13
   Damage: 5
+  IsReal: 0
   Direction: {x: 0, y: 0, z: 0}
+  WhatIsGround:
+    serializedVersion: 2
+    m_Bits: 1536
 --- !u!58 &-5808589473164150589
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -136,8 +140,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 3625043607559282579, guid: 045b15ec09bba42448d89db77fa6f20a, type: 3}
-  m_Color: {r: 0.76375353, g: 0.7924528, b: 0.13082945, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 5f94a2d646d0864428749543e1866aab, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
