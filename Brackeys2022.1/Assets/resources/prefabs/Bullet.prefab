@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ProjectileSpeed: 2
   LifeTime: 13
-  Damage: 22
+  Damage: 7
   IsReal: 0
   Direction: {x: 0, y: 0, z: 0}
   WhatIsGround:

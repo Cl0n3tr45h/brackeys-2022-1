@@ -93,7 +93,7 @@ public class Gun : MonoBehaviour
         if (shotIntervalTimer <= 0 && currentMagSize > 0)
         {
             //do the shooting
-            shotIntervalTimer = 1/(currentFireRate*2);
+            shotIntervalTimer = Mathf.Max(0.1f, 4.5f/(currentFireRate));
             //currentMagSize--;
            /* GameObject Bullet = Instantiate(BulletPrefab, Vector3.zero, Quaternion.identity, BulletSpawn);
             Bullet.transform.right = -(transform.position-Mouse.GetMousePos(0));
@@ -154,16 +154,16 @@ public class Gun : MonoBehaviour
         {
             currentDamage = Damage.imaginary;
             currentProjectileSpeed = ProjectileSpeed.imaginary;
-            currentFireRate = FireRate.imaginary;
-            currentRange = Range.imaginary;
+            currentFireRate = FireRate.imaginary / 2;
+            currentRange = Range.imaginary * 4;
             currentMagSize = MagSize.imaginary;
         }
         else
         {
             currentDamage = Damage.real;
             currentFireRate = FireRate.real;
-            currentProjectileSpeed = ProjectileSpeed.real;
-            currentRange = Range.real;
+            currentProjectileSpeed = ProjectileSpeed.real / 2;
+            currentRange = Range.real * 4;
             currentMagSize = MagSize.real;
         }
         

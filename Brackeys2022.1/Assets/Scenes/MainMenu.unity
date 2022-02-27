@@ -1698,7 +1698,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 61.5, y: -141.6}
+  m_AnchoredPosition: {x: 64, y: -182}
   m_SizeDelta: {x: 154.3941, y: 35.1216}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &591894043
@@ -2277,8 +2277,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -135.0038, y: 17.8213}
-  m_SizeDelta: {x: 296.1866, y: 233.2787}
+  m_AnchoredPosition: {x: -70.7109, y: 6.6}
+  m_SizeDelta: {x: 424.7723, y: 248.9304}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1131359630
 MonoBehaviour:
@@ -2302,7 +2302,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "Snek (@SnekOfSpice)\n- Game Design\n- Sprite Art\n- SFX Scouting (via
     freesound.org)\n\nJaa'm (@c0vvb0yy)\n- Lead Programmer\n\nJeanny Walter\n- OST
-    Composing\n- Animation\n\n\rBreadley Sans font by Ardyana Types"
+    Composing\n- Animation\n\n\rBreadley Sans font by Ardyana Types\nThe Roots font
+    by Manfred Klein"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ccbe82f681246b741a8a362310934160, type: 2}
   m_sharedMaterial: {fileID: -515841280906472206, guid: ccbe82f681246b741a8a362310934160, type: 2}
@@ -2341,7 +2342,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: -23.85
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -2449,8 +2450,8 @@ MonoBehaviour:
     Right Click - Blink
 
 
-    Q - Shift between
-    Real and Imaginary Plane'
+    Q or LShift
+    - Shift between Real and Imaginary Plane'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ccbe82f681246b741a8a362310934160, type: 2}
   m_sharedMaterial: {fileID: -515841280906472206, guid: ccbe82f681246b741a8a362310934160, type: 2}
@@ -3192,7 +3193,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 13, y: -143.4}
+  m_AnchoredPosition: {x: 13, y: -187.4}
   m_SizeDelta: {x: 85.8398, y: 48.7151}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1736836653

@@ -25,7 +25,7 @@ public class PlaneShift : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q) && OnShiftToReal != null)
+        if ((Input.GetKeyDown(KeyCode.Q) || Input.GetKeyDown(KeyCode.LeftShift)) && OnShiftToReal != null)
         {
             //SFX
             FindObjectOfType<AudioManager>().Play("ShiftPlane");

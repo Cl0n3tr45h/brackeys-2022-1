@@ -262,7 +262,7 @@ public class GameLoop : MonoBehaviour
         switch (currentLevelIndex)
         {
             case 0:
-                enemyToSpawn = Random.Range(0, 2);
+                enemyToSpawn = Random.Range(0, 3);
                 //enemyToSpawn = 0;
                 break;
             case 1:
@@ -275,14 +275,14 @@ public class GameLoop : MonoBehaviour
                 enemyToSpawn = Random.Range(0, 1);
                 break;
             case 4:
-                enemyToSpawn = Random.Range(1, 2);
+                enemyToSpawn = Random.Range(1, 3);
                 break;
             case 5:
                 int[] fuck = new int[]{0, 2};
-                enemyToSpawn = fuck[Random.Range(0, 1)];
+                enemyToSpawn = fuck[Random.Range(0, 2)];
                 break;
             default:
-                enemyToSpawn = Random.Range(0, 2);
+                enemyToSpawn = Random.Range(0, 3);
                 break;
         }
         NextEnemyReal = !NextEnemyReal;
