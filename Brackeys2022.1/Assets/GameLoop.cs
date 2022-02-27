@@ -15,8 +15,7 @@ using Vector3 = UnityEngine.Vector3;
 public enum GameState
 {
     FIGHT,
-    LOOT,
-    CRAFT,
+    UPGRADE,
     DEAD,
     WON
 }
@@ -53,9 +52,12 @@ public class GameLoop : MonoBehaviour
     public GameObject ComplexNumberPanel;
     public GameObject OperandPanel;
     public GameObject LootPrefab;
+
+    public Canvas UpgradeCanvas;
     
     public LootManager LootManager;
     private bool lootGenerated = false;
+    private bool upgradesGenerated = false;
     
     [Space][Space] [Header("Crafting")] public Canvas CraftingCanvas;
     [Space][Space] [Header("End")] 
@@ -66,6 +68,9 @@ public class GameLoop : MonoBehaviour
     private static String[] ReasonOfTermination;
     //Combo
     //
+
+
+
 
     private void Awake()
     {
@@ -91,11 +96,8 @@ public class GameLoop : MonoBehaviour
             case GameState.FIGHT:
                 FightBehaviour();
                 break;
-            case GameState.LOOT:
-               LootBehaviour();
-                break;
-            case GameState.CRAFT:
-                CraftBehaviour();
+            case GameState.UPGRADE:
+                UpgradeBehaviour();
                 break;
             case GameState.DEAD:
                 EndGame();
@@ -124,6 +126,26 @@ public class GameLoop : MonoBehaviour
         {
             currentSpawnTimer += Time.deltaTime;
         }
+    }
+
+    public void UpgradeBehaviour()
+    {
+        if (!upgradesGenerated)
+        {
+            UpgradeCanvas.gameObject.SetActive(true);
+            UpgradeCanvas.GetComponent<UpgradeManager>().GenerateUpgrades();
+            upgradesGenerated = true;
+        }
+        
+    }
+
+    public void FinishUpgrading()
+    {
+        UpgradeCanvas.gameObject.SetActive(false);
+        Debug.Log("finished upgrading");
+        upgradesGenerated = false;
+
+        gameState = GameState.FIGHT;
     }
 
     public void LootBehaviour()
@@ -166,7 +188,7 @@ public class GameLoop : MonoBehaviour
         Debug.Log(LootManager.Operand.isAdd);
     }
 
-    public void CollectLoot()
+    /*public void CollectLoot()
     {
         InventoryObject.AddNumbers(LootManager.SelectedLoot);
         InventoryObject.AddOperand(LootManager.Operand);
@@ -176,7 +198,7 @@ public class GameLoop : MonoBehaviour
         
         gameState = GameState.CRAFT;
         lootGenerated = false;
-    }
+    }*/
     public void CraftBehaviour()
     {
         CraftingCanvas.gameObject.SetActive(true);
@@ -282,7 +304,8 @@ public class GameLoop : MonoBehaviour
             //Level geschafft
             ClearRemainingEnemies();
             DespawnLevel();
-            gameState = GameState.LOOT;
+            gameState = GameState.UPGRADE;
+            Debug.Log("Finished");
         }
         else
         {
