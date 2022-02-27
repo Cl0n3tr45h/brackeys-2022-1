@@ -95,9 +95,11 @@ public class Enemy : MonoBehaviour
                     break;
                 case EnemyState.SHOOT:
                     ShootBehaviour();
+                    FindObjectOfType<AudioManager>().Play("EnemyShoot");
                     break;
                 case EnemyState.TELEPORT:
                     TeleportBehaviour();
+                    FindObjectOfType<AudioManager>().Play("EnemyTeleport");
                     break;
                 default:
                    IdleBehaviour();
@@ -254,6 +256,7 @@ public class Enemy : MonoBehaviour
         GameLoop.UnSubscribeToEnemyEvent(OnEnemyDeath);
         //Do stuff for combos points loot etc
         Destroy(this.gameObject);
+        FindObjectOfType<AudioManager>().Play("EnemyDie");
     }
 
     public bool InCameraView()

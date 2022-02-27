@@ -27,6 +27,9 @@ public class PlaneShift : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Q) && OnShiftToReal != null)
         {
+            //SFX
+            FindObjectOfType<AudioManager>().Play("ShiftPlane");
+
             InReal = !InReal;
             if (InReal == true)
             {

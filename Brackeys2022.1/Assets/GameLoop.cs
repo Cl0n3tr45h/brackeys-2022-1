@@ -248,6 +248,7 @@ public class GameLoop : MonoBehaviour
         for (int i = 0; i < enemySpawnPoints.Count; i++)
         {
             SpawnEnemy(i);   
+            FindObjectOfType<AudioManager>().Play("EnemySpawn");
         }
 
         currentKillCount = 0;
