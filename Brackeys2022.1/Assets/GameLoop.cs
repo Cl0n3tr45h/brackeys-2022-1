@@ -231,6 +231,7 @@ public class GameLoop : MonoBehaviour
         {
             Player.SetActive(true);
         }
+        updateUIText();
         //Get player spawn
         Player.transform.SetPositionAndRotation(GameObject.Find("PlayerSpawn").transform.position, Quaternion.identity);
         
